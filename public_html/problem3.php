@@ -10,10 +10,19 @@ function bePositive($arr) {
     //note: use the $arr variable, don't directly touch $a1-$a4
     //TODO use echo to output all of the values as positive (even if they were originally positive) and maintain the original datatype
     //hint: may want to use var_dump() or similar to show final data types
-    for ($x = 0; $x < count($arr); $x++) {
-        abs($arr[$x]);
+
+    //UCID: LM457 DATE: 2/5/2024
+    foreach ($arr as $value) {
+        echo abs($value);
+        echo "<br>";
     }
-    var_dump($arr);
+
+    echo "Data Types: ";
+    foreach ($arr as $value) {
+        echo gettype($value) . " ";
+    }
+
+    echo "<br>UCID: LM457";
 }
 echo "Problem 3: Be Positive<br>";
 ?>
