@@ -13,13 +13,9 @@ function bePositive($arr) {
 
     //UCID: LM457 DATE: 2/5/2024
     foreach ($arr as $value) {
-        echo abs($value);
+        $positiveValue = abs($value);
+        var_dump($positiveValue);
         echo "<br>";
-    }
-
-    echo "Data Types: ";
-    foreach ($arr as $value) {
-        echo gettype($value) . " ";
     }
 
     echo "<br>UCID: LM457";
