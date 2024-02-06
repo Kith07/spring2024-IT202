@@ -11,11 +11,14 @@ function getTotal($arr) {
     //TODO do rounding stuff here (round to two decimals i.e., 0.10, 0.01, 0.00)
 
     //UCID: LM457 DATE: 2/5/2024
-    $total = array_sum($arr);
-    $toral = round($total, 2);
+    foreach ($arr as $value) {
+        $total += $value;
+    }
+    $total = round($total, 2);
 
     echo "The total is " . var_export($total, true);
     echo "<br>UCID: LM457";
+    
     }
 echo "Problem 2: Adding Floats<br>";
 ?>
