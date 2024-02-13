@@ -8,18 +8,94 @@
         window.addEventListener("load", () => {
             console.log("loaded via javascript");
             //TODO: add any extra onload processing you may need here
+            document.querySelector('nav ul li a').addEventListener('click', (event) => {
+                if (event.target.tagName === 'A') {
+                    event.preventDefault();
+                    const link_Text = event.target.innerText;
+                    document.querySelector('h1').innerText = link_Text;
+                    document.title = link_Text;
+                    updateCurrentPage(link_Text);
+                }
+            });
+            getCurrentSelection();
         });
+        
         function getCurrentSelection() {
             setTimeout(() => {
                 //added this delay here as some solutions may require it to update properly (i.e., click code may complete before the navigation changes)
-                //TODO: add code for processing the current selection 
+                //TODO: add code for processing the current selection
+                const nav_Links = document.querySelectorAll('nav a');
+                nav_Links.forEach(link => {
+                    link.addEventListener('click', () => {
+                        const link_Text = link.innerText;
+                        const h1_Tag = document.querySelector('h1');
+                        h1_Tag.innerText = link_Text;
 
+                        document.title = link_Text;
+
+                        updateCurrentPage(link_Text);
+                    });
+                }); 
                 //Note: likely you'll want to call updateCurrentPage towards the end
             }, 100);
         }
     </script>
     <style>
         /* TODO: make edits here */
+
+        /* Making navigation horizontal and removing list item markers */
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            background-color: white;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 10px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: black;
+        }
+
+        /* Changing link color when hovering */
+        nav ul li a:hover {
+            color: rgb(246, 39, 153);
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 20px;
+        }
+
+        /* Changing bullet points to check marks */
+        li::before {
+            content: "✓";
+            margin-right: 5px;
+            color: orangered;
+        }
+
+        h2 {
+            color:#D6FCC5;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 5px;
+        }
+
+        /* Changes the first character in the content in h1 and a to uppercase */
+        h1, a {
+            text-transform: capitalize;
+        }
+
+        body {
+            font-family: "Times New Roman", 'Times New Roman', Times, serif;
+            background-color: #FFE933;
+            color: #121111;
+        }
+
     </style>
     <!-- make the necessary edits above this line -->
 
