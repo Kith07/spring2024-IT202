@@ -25,8 +25,10 @@ if (isset($_POST["save"])) {
         try {
             $stmt->execute($params);
             flash("Profile saved", "success");
-        } catch (Exception $e) {
+        } catch (PDOException $e) {
             users_check_duplicate($e->errorInfo);
+        } catch (Exception $e)  {
+            flash("An unexpected error occurred, please try again", "danger");
         }
         //select fresh data from table
         $stmt = $db->prepare("SELECT id, email, username from Users where id = :id LIMIT 1");
@@ -78,8 +80,10 @@ if (isset($_POST["save"])) {
                             flash("Current password is invalid", "warning");
                         }
                     }
-                } catch (Exception $e) {
+                } catch (PDOException $e) {
                     echo "<pre>" . var_export($e->errorInfo, true) . "</pre>";
+                } catch (Exception $e) {
+                    flash("An unexpected error occurred, please try again", "danger");
                 }
             } else {
                 flash("New passwords don't match", "warning");
