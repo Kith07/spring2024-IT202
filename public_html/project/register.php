@@ -9,8 +9,8 @@ reset_session();
     </div>
     <div>
         <label for="username">Username</label>
-        <input type="text" name="username" required maxlength="30" />                           //UCID: LM457
-    </div>                                                                                      //Date: 3/31/2024
+        <input type="text" name="username" required maxlength="30" />                           <!--UCID: LM457-->
+    </div>                                                                                      <!--Date: 3/31/2024-->
     <div>
         <label for="pw">Password</label>
         <input type="password" id="pw" name="password" required minlength="8" />

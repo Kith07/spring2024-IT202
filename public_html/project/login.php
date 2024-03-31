@@ -4,8 +4,8 @@ require(__DIR__ . "/../../partials/nav.php");
 <form onsubmit="return validate(this)" method="POST">
     <div>
         <label for="email">Email/Username</label>
-        <input type="text" name="email" required />                                             //UCID: LM457                              
-    </div>                                                                                      //Date: 3/31/2024
+        <input type="text" name="email" required />                                             <!--UCID: LM457 -->                             
+    </div>                                                                                      <!--Date: 3/31/2024-->
     <div>
         <label for="pw">Password</label>
         <input type="password" id="pw" name="password" required minlength="8" />
