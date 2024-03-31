@@ -4,8 +4,8 @@ require(__DIR__ . "/../../partials/nav.php");
 <form onsubmit="return validate(this)" method="POST">
     <div>
         <label for="email">Email/Username</label>
-        <input type="text" name="email" required />
-    </div>
+        <input type="text" name="email" required />                                             //UCID: LM457                              
+    </div>                                                                                      //Date: 3/31/2024
     <div>
         <label for="pw">Password</label>
         <input type="password" id="pw" name="password" required minlength="8" />
@@ -21,8 +21,8 @@ require(__DIR__ . "/../../partials/nav.php");
         let isValid = true;
 
         function is_valid_email(email) {
-            const emailRegEx = /^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6})*$/;
-            return emailRegEx.test(email);
+            const emailRegEx = /^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6})*$/;           //UCID: LM457
+            return emailRegEx.test(email);                                                      //Date: 3/31/2024
         }
 
         function is_valid_username(username) {
@@ -73,8 +73,8 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
     }
     if (str_contains($email, "@")) {
         //sanitize
-        //$email = filter_var($email, FILTER_SANITIZE_EMAIL);
-        $email = sanitize_email($email);
+        //$email = filter_var($email, FILTER_SANITIZE_EMAIL);                                       //UCID: LM457
+        $email = sanitize_email($email);                                                            //Date: 3/31/2024
         //validate
         /*if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             flash("Invalid email address");

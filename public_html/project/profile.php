@@ -4,8 +4,8 @@ is_logged_in(true);
 ?>
 <?php
 if (isset($_POST["save"])) {
-    $email = se($_POST, "email", null, false);
-    $username = se($_POST, "username", null, false);
+    $email = se($_POST, "email", null, false);                                              //UCID: LM457                           
+    $username = se($_POST, "username", null, false);                                        //Date: 3/31/2024
     $hasError = false;
     //sanitize
     $email = sanitize_email($email);
@@ -110,15 +110,15 @@ $username = get_username();
     <div class="password-reset">Password Reset</div>
     <div class="mb-3">
         <label for="cp">Current Password</label>
-        <input type="password" name="currentPassword" id="cp" required minlength="8"/>
+        <input type="password" name="currentPassword" id="cp" minlength="8"/>
     </div>
     <div class="mb-3">
         <label for="np">New Password</label>
-        <input type="password" name="newPassword" id="np" required minlength="8"/>
+        <input type="password" name="newPassword" id="np" minlength="8"/>
     </div>
     <div class="mb-3">
         <label for="conp">Confirm Password</label>
-        <input type="password" name="confirmPassword" id="conp" required minlength="8"/>
+        <input type="password" name="confirmPassword" id="conp" minlength="8"/>
     </div>
     <input type="submit" value="Update Profile" name="save" />
 </form>
