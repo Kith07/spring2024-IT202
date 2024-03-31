@@ -100,25 +100,25 @@ $username = get_username();
 <form method="POST" onsubmit="return validate(this);">
     <div class="mb-3">
         <label for="email">Email</label>
-        <input type="email" name="email" id="email" value="<?php se($email); ?>" />
+        <input type="email" name="email" id="email" value="<?php se($email); ?>" required/>
     </div>
     <div class="mb-3">
         <label for="username">Username</label>
-        <input type="text" name="username" id="username" value="<?php se($username); ?>" />
+        <input type="text" name="username" id="username" value="<?php se($username); ?>" required/>
     </div>
     <!-- DO NOT PRELOAD PASSWORD -->
-    <div>Password Reset</div>
+    <div class="password-reset">Password Reset</div>
     <div class="mb-3">
         <label for="cp">Current Password</label>
-        <input type="password" name="currentPassword" id="cp" />
+        <input type="password" name="currentPassword" id="cp" required minlength="8"/>
     </div>
     <div class="mb-3">
         <label for="np">New Password</label>
-        <input type="password" name="newPassword" id="np" />
+        <input type="password" name="newPassword" id="np" required minlength="8"/>
     </div>
     <div class="mb-3">
         <label for="conp">Confirm Password</label>
-        <input type="password" name="confirmPassword" id="conp" />
+        <input type="password" name="confirmPassword" id="conp" required minlength="8"/>
     </div>
     <input type="submit" value="Update Profile" name="save" />
 </form>
@@ -129,11 +129,53 @@ $username = get_username();
         let con = form.confirmPassword.value;
         let isValid = true;
         //TODO add other client side validation....
+        let email = form.email.value;
+        let username = form.username.value;
+        let currpw = form.cp.value;
 
+        function is_valid_email(email) {
+            const emailRegEx = /^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6})*$/;
+            return emailRegEx.test(email);
+        }
+
+        function is_valid_username(username) {
+            const usernameRegEx = /^[a-z0-9_-]{3,16}$/;
+            return usernameRegEx.test(username);
+        }
+
+        if (email === "") {
+            flash("[JS] Email must not be empty", "warning");
+            isValid = false;
+        } else {
+            if (!is_valid_email(email)) {
+                flash("[JS] Invalid email address", "warning");
+                isValid = false;
+            }
+        }
+        if (username === "") {
+            flash("[JS] Username must not be empty", "warning");
+            isValid = false;
+        } else {
+            if (!is_valid_username(username)) {
+                flash("[JS] Invalid username", "warning");
+                isValid = false;
+            }
+        }
+        if (currpw !== "") {
+            if (currpw.length < 8) {
+                flash("[JS] Current password is too short", "warning");
+                isValid = false;
+            } else {
+                if (pw.length < 8) {
+                    flash("[JS] New password is too short", "warning");
+                    isValid = false;
+                }
+            }
+        }
         //example of using flash via javascript
         //find the flash container, create a new element, appendChild
         if (pw !== con) {
-            flash("Password and Confrim password must match", "warning");
+            flash("[JS] Password and Confirm password must match", "warning");
             isValid = false;
         }
         return isValid;

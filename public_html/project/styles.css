@@ -1,48 +1,57 @@
-/* Success alert */
-.success-alert {
-    background-color: limegreen;
+.alert-success {
+    background-color: #4CAF50;
+    color: #FFF;
+    padding: 10px 15px;
 }
 
-/* Warning alert */
-.warning-alert {
-    background-color: goldenrod;
+.alert-warning {
+    background-color: #FFC107;
+    color: #333;
+    padding: 10px 15px;
+    border-radius: 8px;
 }
 
-/* Danger alert */
-.danger-alert {
-    background-color: crimson;
+.alert-danger {
+    background-color: #F44336; 
+    color: #FFF;
+    padding: 10px 15px;
+    border-radius: 8px;
 }
 
-/* Info alert */
-.info-alert {
-    background-color: steelblue;
+.alert-info {
+    background-color: #2196F3;
+    color: #FFF;
+    padding: 10px 15px;
+    border-radius: 8px;
 }
 
-/* Navigation styling */
 nav li {
     display: inline-block;
-    background-color: rgb(43, 127, 186);
-    padding: 5px 10px;
-    margin-right: 10px;
-    border-radius: 5px;
+    background-color: #3498DB; 
+    padding: 10px 15px;
+    margin-right: 20px;
+    border-radius: 8px;
 }
 
 nav li a {
-    color: rgb(17, 87, 136);
+    color: #333;
     text-decoration: none;
 }
 
-/* Input styling */
 input {
-    border-radius: 10px;
-    border: 2px solid rgb(17, 87, 136);
-    padding: 5px 10px;
+    border-radius: 8px;
+    border: 2px solid #3498DB;
+    padding: 8px 12px;
     margin: 5px 0;
 }
 
-/* Body styling */
 body {
-    background-color: rgb(183, 218, 246);
-    color: rgb(17, 87, 136);
-    font-family: Arial, sans-serif;
+    background-color: #ECF0F1;
+    color: #333;
+    font-family: "Montserrat", sans-serif;
+    font-size: 15px;
+}
+
+.password-reset {
+    font-weight: bold;
 }
