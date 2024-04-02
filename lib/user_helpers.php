@@ -16,8 +16,8 @@ function is_logged_in($redirect = false, $destination = "login.php")
 }
 function has_role($role)
 {
-    if (is_logged_in() && isset($_SESSION["user"]["roles"])) {
-        foreach ($_SESSION["user"]["roles"] as $r) {
+    if (is_logged_in() && isset($_SESSION["user"]["roles"])) {              //UCID: LM457
+        foreach ($_SESSION["user"]["roles"] as $r) {                        //Date: 3/31/2024
             if ($r["name"] === $role) {
                 return true;
             }

@@ -1,23 +1,57 @@
 .alert-success {
-    background-color: green
+    background-color: #4CAF50;
+    color: #FFF;
+    padding: 10px 15px;
 }
 
 .alert-warning {
-    background-color: yellow;
+    background-color: #FFC107;
+    color: #333;
+    padding: 10px 15px;
+    border-radius: 8px;
 }
 
 .alert-danger {
-    background-color: red;
+    background-color: #F44336; 
+    color: #FFF;
+    padding: 10px 15px;
+    border-radius: 8px;
 }
 
 .alert-info {
-    background-color: teal;
+    background-color: #2196F3;
+    color: #FFF;
+    padding: 10px 15px;
+    border-radius: 8px;
 }
-nav li{display: inline; background-color: rebeccapurple;}
-nav li a{color: hotpink}
-input{border-radius: 50%;}
-body{
-    background-color: hotpink;
-    color: rgb(153, 0, 153);
 
+nav li {
+    display: inline-block;
+    background-color: #3498DB; 
+    padding: 10px 15px;
+    margin-right: 20px;
+    border-radius: 8px;
+}
+
+nav li a {
+    color: #333;
+    text-decoration: none;
+}
+
+input {
+    border-radius: 8px;
+    border: 2px solid #3498DB;
+    padding: 8px 12px;
+    margin: 5px 0;
+}
+
+body {
+    background-color: #ECF0F1;
+    color: #333;
+    font-family: "Montserrat", sans-serif;
+    font-size: 15px;
+}
+
+.password-reset {
+    font-weight: bold;
 }
