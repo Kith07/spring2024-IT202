@@ -19,8 +19,17 @@ if (isset($_POST["NationalID"])) {
         }
         $selectedPlace = $_POST;
     }
+    // PHP Server Side Validation for Empty Fields
+    $hasError = false;
+    foreach ($selectedPlace as $k => $v) {
+        if (strlen($v) == 0) {
+            flash("\"$k\" cannot be empty", "danger");
+            $hasError = true;
+            break;
+        }
+    }
 
-    if ($selectedPlace) {
+    if ($selectedPlace && !$hasError) {
         $db = getDB();
         $query = "UPDATE `tourist_info` SET ";
         $params = [];
@@ -70,36 +79,36 @@ if ($id > -1) {
 
 if ($output) {
     $form = [
-        ["name" => "NationalID", "placeholder" => "Enter ID", "label" => "National LocationID", "required" => true],
-        ["name" => "name", "placeholder" => "Enter Location Name", "label" => "Location Name", "required" => true],
-        ["name" => "ranking", "placeholder" => "Enter Location Ranking", "label" => "Location Ranking"],
-        ["name" => "description", "placeholder" => "Enter Location Description", "label" => "Location Description"],
-        ["name" => "rating", "placeholder" => "Enter Location Rating", "label" => "Location Rating"],
-        ["name" => "num_reviews", "placeholder" => "Enter Location Number of Reviews", "label" => "Location Number of Reviews"],
-        ["name" => "website", "placeholder" => "Enter Location Website", "label" => "Location Website"],
-        ["name" => "address", "placeholder" => "Enter Location Address", "label" => "Location Address"],
-        ["name" => "phone", "placeholder" => "Enter Location Phone", "label" => "Location Phone"],
-        ["name" => "write_review", "placeholder" => "Enter Write a Review Link", "label" => "Write a Review Link"],
-        ["name" => "monday_open", "placeholder" => "Enter Location Monday Open Time", "label" => "Location Monday Open Time"],
-        ["name" => "monday_close", "placeholder" => "Enter Location Monday Close Time", "label" => "Location Monday Close Time"],
-        ["name" => "tuesday_open", "placeholder" => "Enter Location Tuesday Open Time", "label" => "Location Tuesday Open Time"],
-        ["name" => "tuesday_close", "placeholder" => "Enter Location Tuesday Close Time", "label" => "Location Tuesday Close Time"],
-        ["name" => "wednesday_open", "placeholder" => "Enter Location Wednesday Open Time", "label" => "Location Wednesday Open Time"],
-        ["name" => "wednesday_close", "placeholder" => "Enter Location Wednesday Close Time", "label" => "Location Wednesday Close Time"],
-        ["name" => "thursday_open", "placeholder" => "Enter Location Thursday Open Time", "label" => "Location Thursday Open Time"],
-        ["name" => "thursday_close", "placeholder" => "Enter Location Thursday Close Time", "label" => "Location Thursday Close Time"],
-        ["name" => "friday_open", "placeholder" => "Enter Location Friday Open Time", "label" => "Location Friday Open Time"],
-        ["name" => "friday_close", "placeholder" => "Enter Location Friday Close Time", "label" => "Location Friday Close Time"],
-        ["name" => "saturday_open", "placeholder" => "Enter Location Saturday Open Time", "label" => "Location Saturday Open Time"],
-        ["name" => "saturday_close", "placeholder" => "Enter Location Saturday Close Time", "label" => "Location Saturday Close Time"],
-        ["name" => "sunday_open", "placeholder" => "Enter Location Sunday Open Time", "label" => "Location Sunday Open Time"],
-        ["name" => "sunday_close", "placeholder" => "Enter Location Sunday Close Time", "label" => "Location Sunday Close Time"],
-        ["name" => "popular_tour_title", "placeholder" => "Enter Location Popular Tours Title", "label" => "Location Popular Tours Title"],
-        ["name" => "primary_category", "placeholder" => "Enter Location Popular Tours Category", "label" => "Location Popular Tours Category"],
-        ["name" => "price", "placeholder" => "Enter Location Popular Tour Price", "label" => "Location Popular Tour Price"],
-        ["name" => "partner", "placeholder" => "Enter Location Popular Tour Partner", "label" => "Location Popular Tour Partner"],
-        ["name" => "tour_url", "placeholder" => "Enter Location Popular Tour Link", "label" => "Location Popular Tour Link"],
-        ["name" => "product_code", "placeholder" => "Enter Location Popular Product Tour Code", "label" => "Location Popular Tour Product Code"]
+        ["name" => "NationalID", "placeholder" => "Enter ID", "label" => "National LocationID", "rules" => ["required" => "required"]],
+        ["name" => "name", "placeholder" => "Enter Location Name", "label" => "Location Name", "rules" => ["required" => "required"]],
+        ["name" => "ranking", "placeholder" => "Enter Location Ranking", "label" => "Location Ranking", "rules" => ["required" => "required"]],
+        ["name" => "description", "placeholder" => "Enter Location Description", "label" => "Location Description", "rules" => ["required" => "required"]],
+        ["name" => "rating", "placeholder" => "Enter Location Rating", "label" => "Location Rating", "rules" => ["required" => "required"]],
+        ["name" => "num_reviews", "placeholder" => "Enter Location Number of Reviews", "label" => "Location Number of Reviews", "rules" => ["required" => "required"]],
+        ["name" => "website", "placeholder" => "Enter Location Website", "label" => "Location Website", "rules" => ["required" => "required"]],
+        ["name" => "address", "placeholder" => "Enter Location Address", "label" => "Location Address", "rules" => ["required" => "required"]],
+        ["name" => "phone", "placeholder" => "Enter Location Phone", "label" => "Location Phone", "rules" => ["required" => "required"]],
+        ["name" => "write_review", "placeholder" => "Enter Write a Review Link", "label" => "Write a Review Link", "rules" => ["required" => "required"]],
+        ["name" => "monday_open", "placeholder" => "Enter Location Monday Open Time", "label" => "Location Monday Open Time", "rules" => ["required" => "required"]],
+        ["name" => "monday_close", "placeholder" => "Enter Location Monday Close Time", "label" => "Location Monday Close Time", "rules" => ["required" => "required"]],
+        ["name" => "tuesday_open", "placeholder" => "Enter Location Tuesday Open Time", "label" => "Location Tuesday Open Time", "rules" => ["required" => "required"]],
+        ["name" => "tuesday_close", "placeholder" => "Enter Location Tuesday Close Time", "label" => "Location Tuesday Close Time", "rules" => ["required" => "required"]],
+        ["name" => "wednesday_open", "placeholder" => "Enter Location Wednesday Open Time", "label" => "Location Wednesday Open Time", "rules" => ["required" => "required"]],
+        ["name" => "wednesday_close", "placeholder" => "Enter Location Wednesday Close Time", "label" => "Location Wednesday Close Time", "rules" => ["required" => "required"]],
+        ["name" => "thursday_open", "placeholder" => "Enter Location Thursday Open Time", "label" => "Location Thursday Open Time", "rules" => ["required" => "required"]],
+        ["name" => "thursday_close", "placeholder" => "Enter Location Thursday Close Time", "label" => "Location Thursday Close Time", "rules" => ["required" => "required"]],
+        ["name" => "friday_open", "placeholder" => "Enter Location Friday Open Time", "label" => "Location Friday Open Time", "rules" => ["required" => "required"]],
+        ["name" => "friday_close", "placeholder" => "Enter Location Friday Close Time", "label" => "Location Friday Close Time", "rules" => ["required" => "required"]],
+        ["name" => "saturday_open", "placeholder" => "Enter Location Saturday Open Time", "label" => "Location Saturday Open Time", "rules" => ["required" => "required"]],
+        ["name" => "saturday_close", "placeholder" => "Enter Location Saturday Close Time", "label" => "Location Saturday Close Time", "rules" => ["required" => "required"]],
+        ["name" => "sunday_open", "placeholder" => "Enter Location Sunday Open Time", "label" => "Location Sunday Open Time", "rules" => ["required" => "required"]],
+        ["name" => "sunday_close", "placeholder" => "Enter Location Sunday Close Time", "label" => "Location Sunday Close Time", "rules" => ["required" => "required"]],
+        ["name" => "popular_tour_title", "placeholder" => "Enter Location Popular Tours Title", "label" => "Location Popular Tours Title", "rules" => ["required" => "required"]],
+        ["name" => "primary_category", "placeholder" => "Enter Location Popular Tours Category", "label" => "Location Popular Tours Category", "rules" => ["required" => "required"]],
+        ["name" => "price", "placeholder" => "Enter Location Popular Tour Price", "label" => "Location Popular Tour Price", "rules" => ["required" => "required"]],
+        ["name" => "partner", "placeholder" => "Enter Location Popular Tour Partner", "label" => "Location Popular Tour Partner", "rules" => ["required" => "required"]],
+        ["name" => "tour_url", "placeholder" => "Enter Location Popular Tour Link", "label" => "Location Popular Tour Link", "rules" => ["required" => "required"]],
+        ["name" => "product_code", "placeholder" => "Enter Location Popular Product Tour Code", "label" => "Location Popular Tour Product Code", "rules" => ["required" => "required"]]
     ];
 
     $keys = array_keys($output);
@@ -109,8 +118,71 @@ if ($output) {
         }
     }
 }
-
 ?>
+
+<script>
+    // JS Validation for Empty Fields
+    document.addEventListener("DOMContentLoaded", function () {
+        const form = document.querySelector("form");
+
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            let isValid = true;
+            const fields = [
+                { name: "NationalID", label: "National Location ID" },
+                { name: "name", label: "Location Name" },
+                { name: "ranking", label: "Location Ranking" },
+                { name: "description", label: "Location Description" },
+                { name: "rating", label: "Location Rating" },
+                { name: "num_reviews", label: "Location Number of Reviews" },
+                { name: "website", label: "Location Website" },
+                { name: "address", label: "Location Address" },
+                { name: "phone", label: "Location Phone" },
+                { name: "write_review", label: "Write a Review Link" },
+                { name: "monday_open", label: "Location Monday Open Time" },
+                { name: "monday_close", label: "Location Monday Close Time" },
+                { name: "tuesday_open", label: "Location Tuesday Open Time" },
+                { name: "tuesday_close", label: "Location Tuesday Close Time" },
+                { name: "wednesday_open", label: "Location Wednesday Open Time" },
+                { name: "wednesday_close", label: "Location Wednesday Close Time" },
+                { name: "thursday_open", label: "Location Thursday Open Time" },
+                { name: "thursday_close", label: "Location Thursday Close Time" },
+                { name: "friday_open", label: "Location Friday Open Time" },
+                { name: "friday_close", label: "Location Friday Close Time" },
+                { name: "saturday_open", label: "Location Saturday Open Time" },
+                { name: "saturday_close", label: "Location Saturday Close Time" },
+                { name: "sunday_open", label: "Location Sunday Open Time" },
+                { name: "sunday_close", label: "Location Sunday Close Time" },
+                { name: "popular_tour_title", label: "Location Popular Tours Title" },
+                { name: "primary_category", label: "Location Popular Tours Category" },
+                { name: "price", label: "Location Popular Tour Price" },
+                { name: "partner", label: "Location Popular Tour Partner" },
+                { name: "tour_url", label: "Location Popular Tour Link" },
+                { name: "product_code", label: "Location Popular Tour Product Code" }
+            ];
+
+            fields.forEach(field => {
+                const input = form.elements[field.name];
+                if (!input) {
+                    console.error(`Input element for "${field.name}" not found`);
+                } else {
+                    const value = input.value.trim();
+                    if (value === "") {
+                        flash(`"${field.label}" must not be empty [JS]`, "warning");
+                        isValid = false;
+                    }
+                }
+            });
+
+            if (isValid) {
+                form.submit();
+            }
+        });
+    });
+</script>
+
+
 <div class="container-fluid">
     <h3>Edit Tourist Location</h3>
     <div>

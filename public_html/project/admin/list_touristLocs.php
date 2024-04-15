@@ -15,7 +15,7 @@ $form = [
 
     ["type" => "text", "name" => "name", "placeholder" => "Name Search", "label" => "Name Search", "include_margin" => false],
 
-    ["type" => "decimal", "name" => "min_rating", "placeholder" => "Minimum Rating", "label" => "Minimum Rating", "include_margin" => false],
+    ["type" => "decimal", "name" => "min_rating", "placeholder" => "Minimum Rating", "label" => "Minimum Rating", "pattern" => "\d*\.?\d*", "include_margin" => false],
 
     ["type" => "number", "name" => "min_num_reviews", "placeholder" => "Minimum Reviews", "label" => "Minimum Reviews", "include_margin" => false],
 
@@ -28,7 +28,7 @@ $form = [
     ["type" => "number", "name" => "limit", "label" => "Limit", "value" => "10", "include_margin" => false],
 ];
 
-$query = "SELECT id, location_id, language, currency, NationalID, name, ranking, description, rating, num_reviews, website, address, phone, write_review, monday_open, monday_close, tuesday_open, tuesday_close, wednesday_open, wednesday_close, thursday_open, thursday_close, friday_open, friday_close, saturday_open, saturday_close, sunday_open, sunday_close, popular_tour_title, primary_category, price, partner, tour_url, product_code, is_api, created FROM `tourist_info` WHERE 1=1";
+$query = "SELECT id, location_id, language, currency, NationalID, name, ranking, description, rating, num_reviews, website, address, phone, write_review, monday_open, monday_close, tuesday_open, tuesday_close, wednesday_open, wednesday_close, thursday_open, thursday_close, friday_open, friday_close, saturday_open, saturday_close, sunday_open, sunday_close, popular_tour_title, primary_category, price, partner, tour_url, product_code, is_api, created  FROM `tourist_info` WHERE 1=1";
 $params = [];
 $session_key = $_SERVER["SCRIPT_NAME"];
 $is_clear = isset($_GET["clear"]);
@@ -133,10 +133,10 @@ $table = ["data" => $results, "title" => "List of Tourist Locations Data", "igno
 <div class="container-fluid">
 <h3>Tourist Locations Filter</h3>
     <form method="GET">
-        <div class = "row mb-3" style = "align-items: flex-end;">
-            <?php foreach ($form as $field) : ?>
+        <div class = "row mb-3" style = "align-items: space-around;">
+            <?php foreach ($form as $k => $v) : ?>
                 <div class = "col">
-                    <?php render_input($field); ?>
+                    <?php render_input($v); ?>
                 </div>
                 <?php endforeach; ?>
         </div>

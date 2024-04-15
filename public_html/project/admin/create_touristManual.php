@@ -11,14 +11,49 @@ if (!has_role("Admin")) {
 <?php
 if (isset($_POST["nationallocation_id"])) {
     $selectedPlace = [];
-    foreach ($_POST as $key => $value) {
-        if (!in_array($key, ["nationallocation_id", "location_name", "location_ranking", "location_description", "location_rating", "location_num_reviews", "location_website", "location_address", "location_phone", "write_review_link", "location_monday_open", "location_monday_close", "location_tuesday_open", "location_tuesday_close", "location_wednesday_open", "location_wednesday_close", "location_thursday_open", "location_thursday_close", "location_friday_open", "location_friday_close", "location_saturday_open", "location_saturday_close", "location_sunday_open", "location_sunday_close", "location_popular_tours_title", "location_popular_tours_category", "location_popular_tour_price", "location_popular_tour_partner", "location_popular_tour_link", "location_popular_tour_code"])) {
-            unset($_POST[$key]);
+    $requiredFields = [
+        "nationallocation_id" => "National Location ID",
+        "location_name" => "Location Name",
+        "location_ranking" => "Location Ranking",
+        "location_description" => "Location Description",
+        "location_rating" => "Location Rating",
+        "location_num_reviews" => "Location Number of Reviews",
+        "location_website" => "Location Website",
+        "location_address" => "Location Address",
+        "location_phone" => "Location Phone",
+        "write_review_link" => "Write a Review Link",
+        "location_monday_open" => "Location Monday Open Time",
+        "location_monday_close" => "Location Monday Close Time",
+        "location_tuesday_open" => "Location Tuesday Open Time",
+        "location_tuesday_close" => "Location Tuesday Close Time",
+        "location_wednesday_open" => "Location Wednesday Open Time",
+        "location_wednesday_close" => "Location Wednesday Close Time",
+        "location_thursday_open" => "Location Thursday Open Time",
+        "location_thursday_close" => "Location Thursday Close Time",
+        "location_friday_open" => "Location Friday Open Time",
+        "location_friday_close" => "Location Friday Close Time",
+        "location_saturday_open" => "Location Saturday Open Time",
+        "location_saturday_close" => "Location Saturday Close Time",
+        "location_sunday_open" => "Location Sunday Open Time",
+        "location_sunday_close" => "Location Sunday Close Time",
+        "location_popular_tours_title" => "Location Popular Tours Title",
+        "location_popular_tours_category" => "Location Popular Tours Category",
+        "location_popular_tour_price" => "Location Popular Tour Price",
+        "location_popular_tour_partner" => "Location Popular Tour Partner",
+        "location_popular_tour_link" => "Location Popular Tour Link",
+        "location_popular_tour_code" => "Location Popular Tour Product Code"
+    ];
+
+    $hasError = false;
+
+    foreach ($requiredFields as $fieldName => $fieldLabel) {
+        if (empty($_POST[$fieldName])) {
+            flash("$fieldLabel must not be empty", "danger");
+            $hasError = true;
         }
-        $selectedPlace = $_POST;
     }
 
-    if ($selectedPlace) {
+    if ($selectedPlace && !$hasError) {
         $db = getDB();
 
         $query = "INSERT INTO `tourist_info` (`location_id`, `language`, `currency`, `NationalID`, `name`, `ranking`, `description`, `rating`, `num_reviews`, `website`, `address`, `phone`, `write_review`, `monday_open`, `monday_close`, `tuesday_open`, `tuesday_close`, `wednesday_open`, `wednesday_close`, `thursday_open`, `thursday_close`, `friday_open`, `friday_close`, `saturday_open`, `saturday_close`, `sunday_open`, `sunday_close`, `popular_tour_title`, `primary_category`, `price`, `partner`, `tour_url`, `product_code`) ";
@@ -74,6 +109,66 @@ if (isset($_POST["nationallocation_id"])) {
 }
 
 ?>
+
+
+<script>
+    // JS Validation for Empty Fields
+    
+    document.addEventListener("DOMContentLoaded", function () {
+        const form = document.querySelector("form");
+
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            let isValid = true;
+            const fields = [
+                { name: "nationallocation_id", label: "National Location ID" },
+                { name: "location_name", label: "Location Name" },
+                { name: "location_ranking", label: "Location Ranking" },
+                { name: "location_description", label: "Location Description" },
+                { name: "location_rating", label: "Location Rating" },
+                { name: "location_num_reviews", label: "Location Number of Reviews" },
+                { name: "location_website", label: "Location Website" },
+                { name: "location_address", label: "Location Address" },
+                { name: "location_phone", label: "Location Phone" },
+                { name: "write_review_link", label: "Write a Review Link" },
+                { name: "location_monday_open", label: "Location Monday Open Time" },
+                { name: "location_monday_close", label: "Location Monday Close Time" },
+                { name: "location_tuesday_open", label: "Location Tuesday Open Time" },
+                { name: "location_tuesday_close", label: "Location Tuesday Close Time" },
+                { name: "location_wednesday_open", label: "Location Wednesday Open Time" },
+                { name: "location_wednesday_close", label: "Location Wednesday Close Time" },
+                { name: "location_thursday_open", label: "Location Thursday Open Time" },
+                { name: "location_thursday_close", label: "Location Thursday Close Time" },
+                { name: "location_friday_open", label: "Location Friday Open Time" },
+                { name: "location_friday_close", label: "Location Friday Close Time" },
+                { name: "location_saturday_open", label: "Location Saturday Open Time" },
+                { name: "location_saturday_close", label: "Location Saturday Close Time" },
+                { name: "location_sunday_open", label: "Location Sunday Open Time" },
+                { name: "location_sunday_close", label: "Location Sunday Close Time" },
+                { name: "location_popular_tours_title", label: "Location Popular Tours Title" },
+                { name: "location_popular_tours_category", label: "Location Popular Tours Category" },
+                { name: "location_popular_tour_price", label: "Location Popular Tour Price" },
+                { name: "location_popular_tour_partner", label: "Location Popular Tour Partner" },
+                { name: "location_popular_tour_link", label: "Location Popular Tour Link" },
+                { name: "location_popular_tour_code", label: "Location Popular Tour Product Code" }
+            ];
+
+            fields.forEach(field => {
+                const input = form.elements[field.name];
+                const value = input.value.trim();
+                if (value === "") {
+                    flash(`"${field.label}" must not be empty [JS]`, "warning");
+                    isValid = false;
+                }
+            });
+
+            if (isValid) {
+                form.submit();
+            }
+        });
+    });
+</script>
 
 <div class="container-fluid">
     <h3>Add Tourist Location</h3>
