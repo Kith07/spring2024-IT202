@@ -78,36 +78,36 @@ if (isset($_POST["nationallocation_id"])) {
 <div class="container-fluid">
     <h3>Add Tourist Location</h3>
     <form method="POST">
-        <?php render_input(["name" => "nationallocation_id", "placeholder" => "Enter ID", "label" => "National LocationID", "required" => true]); ?>
-        <?php render_input(["name" => "location_name", "placeholder" => "Enter Location Name", "label" => "Location Name", "required" => true]); ?>
-        <?php render_input(["name" => "location_ranking", "placeholder" => "Enter Location Ranking", "label" => "Location Ranking"]); ?>
-        <?php render_input(["name" => "location_description", "placeholder" => "Enter Location Description", "label" => "Location Description"]); ?>
-        <?php render_input(["name" => "location_rating", "placeholder" => "Enter Location Rating", "label" => "Location Rating"]); ?>
-        <?php render_input(["name" => "location_num_reviews", "placeholder" => "Enter Location Number of Reviews", "label" => "Location Number of Reviews"]); ?>
-        <?php render_input(["name" => "location_website", "placeholder" => "Enter Location Website", "label" => "Location Website"]); ?>
-        <?php render_input(["name" => "location_address", "placeholder" => "Enter Location Address", "label" => "Location Address"]); ?>
-        <?php render_input(["name" => "location_phone", "placeholder" => "Enter Location Phone", "label" => "Location Phone"]); ?>
-        <?php render_input(["name" => "write_review_link", "placeholder" => "Enter Write a Review Link", "label" => "Write a Review Link"]); ?>
-        <?php render_input(["name" => "location_monday_open", "placeholder" => "Enter Location Monday Open Time", "label" => "Location Monday Open Time"]); ?>
-        <?php render_input(["name" => "location_monday_close", "placeholder" => "Enter Location Monday Close Time", "label" => "Location Monday Close Time"]); ?>
-        <?php render_input(["name" => "location_tuesday_open", "placeholder" => "Enter Location Tuesday Open Time", "label" => "Location Tuesday Open Time"]); ?>
-        <?php render_input(["name" => "location_tuesday_close", "placeholder" => "Enter Location Tuesday Close Time", "label" => "Location Tuesday Close Time"]); ?>
-        <?php render_input(["name" => "location_wednesday_open", "placeholder" => "Enter Location Wednesday Open Time", "label" => "Location Wednesday Open Time"]); ?>
-        <?php render_input(["name" => "location_wednesday_close", "placeholder" => "Enter Location Wednesday Close Time", "label" => "Location Wednesday Close Time"]); ?>
-        <?php render_input(["name" => "location_thursday_open", "placeholder" => "Enter Location Thursday Open Time", "label" => "Location Thursday Open Time"]); ?>
-        <?php render_input(["name" => "location_thursday_close", "placeholder" => "Enter Location Thursday Close Time", "label" => "Location Thursday Close Time"]); ?>
-        <?php render_input(["name" => "location_friday_open", "placeholder" => "Enter Location Friday Open Time", "label" => "Location Friday Open Time"]); ?>
-        <?php render_input(["name" => "location_friday_close", "placeholder" => "Enter Location Friday Close Time", "label" => "Location Friday Close Time"]); ?>
-        <?php render_input(["name" => "location_saturday_open", "placeholder" => "Enter Location Saturday Open Time", "label" => "Location Saturday Open Time"]); ?>
-        <?php render_input(["name" => "location_saturday_close", "placeholder" => "Enter Location Saturday Close Time", "label" => "Location Saturday Close Time"]); ?>
-        <?php render_input(["name" => "location_sunday_open", "placeholder" => "Enter Location Sunday Open Time", "label" => "Location Sunday Open Time"]); ?>
-        <?php render_input(["name" => "location_sunday_close", "placeholder" => "Enter Location Sunday Close Time", "label" => "Location Sunday Close Time"]); ?>
-        <?php render_input(["name" => "location_popular_tours_title", "placeholder" => "Enter Location Popular Tours Title", "label" => "Location Popular Tours Title"]); ?>
-        <?php render_input(["name" => "location_popular_tours_category", "placeholder" => "Enter Location Popular Tours Category", "label" => "Location Popular Tours Category"]); ?>
-        <?php render_input(["name" => "location_popular_tour_price", "placeholder" => "Enter Location Popular Tour Price", "label" => "Location Popular Tour Price"]); ?>
-        <?php render_input(["name" => "location_popular_tour_partner", "placeholder" => "Enter Location Popular Tour Partner", "label" => "Location Popular Tour Partner"]); ?>
-        <?php render_input(["name" => "location_popular_tour_link", "placeholder" => "Enter Location Popular Tour Link", "label" => "Location Popular Tour Link"]); ?>
-        <?php render_input(["name" => "location_popular_tour_code", "placeholder" => "Enter Location Popular Product Tour Code", "label" => "Location Popular Tour Product Code"]); ?>
+        <?php render_input(["name" => "nationallocation_id", "placeholder" => "Enter ID", "label" => "National LocationID", "rules" => ["required" => "required"]]); ?>
+        <?php render_input(["name" => "location_name", "placeholder" => "Enter Location Name", "label" => "Location Name", "rules" => ["required" => "required"]]); ?>
+        <?php render_input(["name" => "location_ranking", "placeholder" => "Enter Location Ranking", "label" => "Location Ranking", "rules" => ["required" => "required"]]); ?>
+        <?php render_input(["name" => "location_description", "placeholder" => "Enter Location Description", "label" => "Location Description", "rules" => ["required" => "required"]]); ?>
+        <?php render_input(["name" => "location_rating", "placeholder" => "Enter Location Rating", "label" => "Location Rating", "rules" => ["required" => "required"]]); ?>
+        <?php render_input(["name" => "location_num_reviews", "placeholder" => "Enter Location Number of Reviews", "label" => "Location Number of Reviews", "rules" => ["required" => "required"]]); ?>
+        <?php render_input(["name" => "location_website", "placeholder" => "Enter Location Website", "label" => "Location Website", "rules" => ["required" => "required"]]); ?>
+        <?php render_input(["name" => "location_address", "placeholder" => "Enter Location Address", "label" => "Location Address", "rules" => ["required" => "required"]]); ?>
+        <?php render_input(["name" => "location_phone", "placeholder" => "Enter Location Phone", "label" => "Location Phone", "rules" => ["required" => "required"]]); ?>
+        <?php render_input(["name" => "write_review_link", "placeholder" => "Enter Write a Review Link", "label" => "Write a Review Link", "rules" => ["required" => "required"]]); ?>
+        <?php render_input(["name" => "location_monday_open", "placeholder" => "Enter Location Monday Open Time", "label" => "Location Monday Open Time", "rules" => ["required" => "required"]]); ?>
+        <?php render_input(["name" => "location_monday_close", "placeholder" => "Enter Location Monday Close Time", "label" => "Location Monday Close Time", "rules" => ["required" => "required"]]); ?>
+        <?php render_input(["name" => "location_tuesday_open", "placeholder" => "Enter Location Tuesday Open Time", "label" => "Location Tuesday Open Time", "rules" => ["required" => "required"]]); ?>
+        <?php render_input(["name" => "location_tuesday_close", "placeholder" => "Enter Location Tuesday Close Time", "label" => "Location Tuesday Close Time", "rules" => ["required" => "required"]]); ?>
+        <?php render_input(["name" => "location_wednesday_open", "placeholder" => "Enter Location Wednesday Open Time", "label" => "Location Wednesday Open Time", "rules" => ["required" => "required"]]); ?>
+        <?php render_input(["name" => "location_wednesday_close", "placeholder" => "Enter Location Wednesday Close Time", "label" => "Location Wednesday Close Time", "rules" => ["required" => "required"]]); ?>
+        <?php render_input(["name" => "location_thursday_open", "placeholder" => "Enter Location Thursday Open Time", "label" => "Location Thursday Open Time", "rules" => ["required" => "required"]]); ?>
+        <?php render_input(["name" => "location_thursday_close", "placeholder" => "Enter Location Thursday Close Time", "label" => "Location Thursday Close Time", "rules" => ["required" => "required"]]); ?>
+        <?php render_input(["name" => "location_friday_open", "placeholder" => "Enter Location Friday Open Time", "label" => "Location Friday Open Time", "rules" => ["required" => "required"]]); ?>
+        <?php render_input(["name" => "location_friday_close", "placeholder" => "Enter Location Friday Close Time", "label" => "Location Friday Close Time", "rules" => ["required" => "required"]]); ?>
+        <?php render_input(["name" => "location_saturday_open", "placeholder" => "Enter Location Saturday Open Time", "label" => "Location Saturday Open Time", "rules" => ["required" => "required"]]); ?>
+        <?php render_input(["name" => "location_saturday_close", "placeholder" => "Enter Location Saturday Close Time", "label" => "Location Saturday Close Time", "rules" => ["required" => "required"]]); ?>
+        <?php render_input(["name" => "location_sunday_open", "placeholder" => "Enter Location Sunday Open Time", "label" => "Location Sunday Open Time", "rules" => ["required" => "required"]]); ?>
+        <?php render_input(["name" => "location_sunday_close", "placeholder" => "Enter Location Sunday Close Time", "label" => "Location Sunday Close Time", "rules" => ["required" => "required"]]); ?>
+        <?php render_input(["name" => "location_popular_tours_title", "placeholder" => "Enter Location Popular Tours Title", "label" => "Location Popular Tours Title", "rules" => ["required" => "required"]]); ?>
+        <?php render_input(["name" => "location_popular_tours_category", "placeholder" => "Enter Location Popular Tours Category", "label" => "Location Popular Tours Category", "rules" => ["required" => "required"]]); ?>
+        <?php render_input(["name" => "location_popular_tour_price", "placeholder" => "Enter Location Popular Tour Price", "label" => "Location Popular Tour Price", "rules" => ["required" => "required"]]); ?>
+        <?php render_input(["name" => "location_popular_tour_partner", "placeholder" => "Enter Location Popular Tour Partner", "label" => "Location Popular Tour Partner", "rules" => ["required" => "required"]]); ?>
+        <?php render_input(["name" => "location_popular_tour_link", "placeholder" => "Enter Location Popular Tour Link", "label" => "Location Popular Tour Link", "rules" => ["required" => "required"]]); ?>
+        <?php render_input(["name" => "location_popular_tour_code", "placeholder" => "Enter Location Popular Product Tour Code", "label" => "Location Popular Tour Product Code", "rules" => ["required" => "required"]]); ?>
         <?php render_button(["text" => "Add Tourist Place", "type" => "submit"]); ?>
     </form>
 </div>
