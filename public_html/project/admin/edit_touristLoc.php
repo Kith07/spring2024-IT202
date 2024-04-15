@@ -20,16 +20,14 @@ if (isset($_POST["NationalID"])) {
         $selectedPlace = $_POST;
     }
     // PHP Server Side Validation for Empty Fields
-    $hasError = false;
     foreach ($selectedPlace as $k => $v) {
         if (strlen($v) == 0) {
             flash("\"$k\" cannot be empty", "danger");
-            $hasError = true;
             break;
         }
     }
 
-    if ($selectedPlace && !$hasError) {
+    if ($selectedPlace) {
         $db = getDB();
         $query = "UPDATE `tourist_info` SET ";
         $params = [];
