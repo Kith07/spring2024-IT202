@@ -13,9 +13,12 @@ if (isset($_POST["nationallocation_id"])) {
     $nationalLocID = se($_POST, "nationallocation_id", "", false);
     if ($nationalLocID) {
         $selectedPlace = fetch_touristPlace($nationalLocID);
+        if(!$selectedPlace){
+            flash("Tourist Place Not Found", "warning");
+        }
         error_log("API Data" . var_export($selectedPlace, true));
     } else {
-        flash("Tourist Place Not Found", "warning");
+        flash("Invalid National ID", "warning");
     }
 
     if ($selectedPlace) {
@@ -64,8 +67,12 @@ if (isset($_POST["nationallocation_id"])) {
             ]);
             flash("Inserted Successfully " . $db->lastInsertId(), "success");
         } catch (PDOException $e) {
-            error_log("Something broke with the query" . var_export($e, true));
-            flash("An error occurred", "danger");
+            if ($e->errorInfo[1] == 1062) {
+                flash("Duplicate Entry", "warning");
+            } else {
+                error_log("Something broke with the query" . var_export($e, true));
+                flash("An error occurred", "danger");
+            }
         }
     }
 }
