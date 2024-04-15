@@ -28,7 +28,7 @@ $form = [
     ["type" => "number", "name" => "limit", "label" => "Limit", "value" => "10", "include_margin" => false],
 ];
 
-$query = "SELECT id, location_id, language, currency, NationalID, name, ranking, description, rating, num_reviews, website, address, phone, write_review, monday_open, monday_close, tuesday_open, tuesday_close, wednesday_open, wednesday_close, thursday_open, thursday_close, friday_open, friday_close, saturday_open, saturday_close, sunday_open, sunday_close, popular_tour_title, primary_category, price, partner, tour_url, product_code, is_api FROM `tourist_info` WHERE 1=1";
+$query = "SELECT id, location_id, language, currency, NationalID, name, ranking, description, rating, num_reviews, website, address, phone, write_review, monday_open, monday_close, tuesday_open, tuesday_close, wednesday_open, wednesday_close, thursday_open, thursday_close, friday_open, friday_close, saturday_open, saturday_close, sunday_open, sunday_close, popular_tour_title, primary_category, price, partner, tour_url, product_code, is_api, created FROM `tourist_info` WHERE 1=1";
 $params = [];
 $session_key = $_SERVER["SCRIPT_NAME"];
 $is_clear = isset($_GET["clear"]);
@@ -127,7 +127,7 @@ try {
     flash("An error occurred, please try again", "danger");
 }
 
-$table = ["data" => $results, "title" => "List of Tourist Locations Data", "ignored_columns" => ["id"], "edit_url" => get_url("admin/edit_touristLoc.php"), "delete_url" => get_url("admin/delete_touristLocs.php")];
+$table = ["data" => $results, "title" => "List of Tourist Locations Data", "ignored_columns" => ["id", "location_id", "language", "currency", "description", "write_review", "monday_open", "monday_close", "tuesday_open", "tuesday_close", "wednesday_open", "wednesday_close", "thursday_open", "thursday_close", "friday_open", "friday_close", "saturday_open", "saturday_close", "sunday_open", "sunday_close", "popular_tour_title", "primary_category", "price", "partner", "tour_url", "product_code", "is_api"], "edit_url" => get_url("admin/edit_touristLoc.php"), "delete_url" => get_url("admin/delete_touristLocs.php"), "view_url" => get_url("admin/view_locationDetails.php")];
 ?>
 
 <div class="container-fluid">
