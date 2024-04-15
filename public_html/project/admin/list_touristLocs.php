@@ -127,7 +127,7 @@ try {
     flash("An error occurred, please try again", "danger");
 }
 
-$table = ["data" => $results, "title" => "List of Tourist Locations Data", "ignored_columns" => ["id"], "edit_url" => get_url("admin/edit_touristLoc.php")];
+$table = ["data" => $results, "title" => "List of Tourist Locations Data", "ignored_columns" => ["id"], "edit_url" => get_url("admin/edit_touristLoc.php"), "delete_url" => get_url("admin/delete_touristLocs.php")];
 ?>
 
 <div class="container-fluid">

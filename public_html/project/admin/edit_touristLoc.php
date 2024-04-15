@@ -113,6 +113,9 @@ if ($output) {
 ?>
 <div class="container-fluid">
     <h3>Edit Tourist Location</h3>
+    <div>
+        <a href="<?php echo get_url("admin/list_touristLocs.php"); ?>" class="btn btn-secondary">Back</a>
+    </div>
     <form method="POST">
         <?php foreach ($form as $field) : ?>
             <?php render_input($field); ?>
