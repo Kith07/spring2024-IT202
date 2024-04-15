@@ -11,6 +11,12 @@ if (!has_role("Admin")) {
 <?php
 if (isset($_POST["nationallocation_id"])) {
     $selectedPlace = [];
+    foreach ($_POST as $key => $value) {
+        if (!in_array($key, ["nationallocation_id", "location_name", "location_ranking", "location_description", "location_rating", "location_num_reviews", "location_website", "location_address", "location_phone", "write_review_link", "location_monday_open", "location_monday_close", "location_tuesday_open", "location_tuesday_close", "location_wednesday_open", "location_wednesday_close", "location_thursday_open", "location_thursday_close", "location_friday_open", "location_friday_close", "location_saturday_open", "location_saturday_close", "location_sunday_open", "location_sunday_close", "location_popular_tours_title", "location_popular_tours_category", "location_popular_tour_price", "location_popular_tour_partner", "location_popular_tour_link", "location_popular_tour_code"])) {
+            unset($_POST[$key]);
+        }
+        $selectedPlace = $_POST;
+    }
     $requiredFields = [
         "nationallocation_id" => "National Location ID",
         "location_name" => "Location Name",
@@ -44,16 +50,13 @@ if (isset($_POST["nationallocation_id"])) {
         "location_popular_tour_code" => "Location Popular Tour Product Code"
     ];
 
-    $hasError = false;
-
     foreach ($requiredFields as $fieldName => $fieldLabel) {
         if (empty($_POST[$fieldName])) {
             flash("$fieldLabel must not be empty", "danger");
-            $hasError = true;
         }
     }
 
-    if ($selectedPlace && !$hasError) {
+    if ($selectedPlace) {
         $db = getDB();
 
         $query = "INSERT INTO `tourist_info` (`location_id`, `language`, `currency`, `NationalID`, `name`, `ranking`, `description`, `rating`, `num_reviews`, `website`, `address`, `phone`, `write_review`, `monday_open`, `monday_close`, `tuesday_open`, `tuesday_close`, `wednesday_open`, `wednesday_close`, `thursday_open`, `thursday_close`, `friday_open`, `friday_close`, `saturday_open`, `saturday_close`, `sunday_open`, `sunday_close`, `popular_tour_title`, `primary_category`, `price`, `partner`, `tour_url`, `product_code`) ";
