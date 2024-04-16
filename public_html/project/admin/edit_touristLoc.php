@@ -25,7 +25,6 @@ if (isset($_POST["NationalID"])) {
         if (strlen($v) == 0) {
             flash("\"$k\" cannot be empty", "danger");
             $hasError = true;
-            break;
         }
     }
 
