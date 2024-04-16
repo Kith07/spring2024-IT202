@@ -10,11 +10,12 @@ if (!has_role("Admin")) {
 
 <?php
 
-$id = se($_GET, "id", -1, false);
-$output = [];
+$id = se($_GET, "id", -1, false);           //UCID: LM457
+$output = [];                               //DATE: 4/16/2024
 if ($id > -1) {
     $db = getDB();
-    $query = "SELECT id, location_id, language, currency, NationalID, name, ranking, description, rating, num_reviews, website, address, phone, write_review, monday_open, monday_close, tuesday_open, tuesday_close, wednesday_open, wednesday_close, thursday_open, thursday_close, friday_open, friday_close, saturday_open, saturday_close, sunday_open, sunday_close, popular_tour_title, primary_category, price, partner, tour_url, product_code FROM `tourist_info` WHERE id = :id";
+    $query = "SELECT id, location_id, language, currency, NationalID, name, ranking, description, rating, num_reviews, website, address, phone, write_review, monday_open, monday_close, tuesday_open, tuesday_close, wednesday_open, wednesday_close, thursday_open, thursday_close, 
+    friday_open, friday_close, saturday_open, saturday_close, sunday_open, sunday_close, popular_tour_title, primary_category, price, partner, tour_url, product_code FROM `tourist_info` WHERE id = :id";
     try {
         $stmt = $db->prepare($query);
         $stmt->execute([":id" => $id]);
@@ -55,8 +56,8 @@ foreach ($output as $key => $value) {
         <li class="list-group-item"><strong>Rating:</strong> <?php se($output, "rating", "Unknown"); ?></li>
         <li class="list-group-item"><strong>Number of Reviews:</strong> <?php se($output, "num_reviews", "Unknown"); ?></li>
         <li class="list-group-item"><strong>Website: </strong><?php se($output, "website", "Unknown"); ?></li>
-        <li class="list-group-item"><strong>Address: </strong><?php se($output, "address", "Unknown"); ?></li>
-        <li class="list-group-item"><strong>Phone: </strong><?php se($output, "phone", "Unknown"); ?></li>
+        <li class="list-group-item"><strong>Address: </strong><?php se($output, "address", "Unknown"); ?></li>                                      <!--UCID: LM457-->                       
+        <li class="list-group-item"><strong>Phone: </strong><?php se($output, "phone", "Unknown"); ?></li>                                          <!--DATE: 4/16/2024-->
         <li class="list-group-item"><strong>Write Review: </strong><?php se($output, "write_review", "Unknown"); ?></li>
         <li class="list-group-item"><strong>Timings: </strong><br><br>
             <table>
@@ -102,10 +103,7 @@ foreach ($output as $key => $value) {
     </ul>
 
 </div>
-
 </div>
-
-
 <?php
 //note we need to go up 1 more directory
 require_once(__DIR__ . "/../../../partials/flash.php");
