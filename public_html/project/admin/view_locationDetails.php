@@ -44,10 +44,10 @@ foreach ($output as $key => $value) {
     <div>
         <a href="<?php echo get_url("admin/list_touristLocs.php"); ?>" class="btn btn-secondary">Back</a>
         <a href="<?php echo get_url("admin/edit_touristLoc.php?id=" . $id); ?>" class="btn btn-primary">Edit</a>
-        <form method="POST" style="display: inline-block;">
-            <input type="hidden" name="id" value="<?php echo $id; ?>">
+        <form method="POST" action="<?php echo get_url("admin/delete_touristLocs.php?id=" . $id); ?>" style="display: inline-block;">
             <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this record?')">Delete</button>
         </form>
+
     </div>
     <ul class="list-group">
         <li class="list-group-item"><strong>National ID: </strong> <?php se($output, "NationalID", "Unknown"); ?></li>
@@ -56,8 +56,8 @@ foreach ($output as $key => $value) {
         <li class="list-group-item"><strong>Rating:</strong> <?php se($output, "rating", "Unknown"); ?></li>
         <li class="list-group-item"><strong>Number of Reviews:</strong> <?php se($output, "num_reviews", "Unknown"); ?></li>
         <li class="list-group-item"><strong>Website: </strong><?php se($output, "website", "Unknown"); ?></li>
-        <li class="list-group-item"><strong>Address: </strong><?php se($output, "address", "Unknown"); ?></li>                                      <!--UCID: LM457-->                       
-        <li class="list-group-item"><strong>Phone: </strong><?php se($output, "phone", "Unknown"); ?></li>                                          <!--DATE: 4/16/2024-->
+        <li class="list-group-item"><strong>Address: </strong><?php se($output, "address", "Unknown"); ?></li> <!--UCID: LM457-->
+        <li class="list-group-item"><strong>Phone: </strong><?php se($output, "phone", "Unknown"); ?></li> <!--DATE: 4/16/2024-->
         <li class="list-group-item"><strong>Write Review: </strong><?php se($output, "write_review", "Unknown"); ?></li>
         <li class="list-group-item"><strong>Timings: </strong><br><br>
             <table>
@@ -93,7 +93,8 @@ foreach ($output as $key => $value) {
                     <td>Sunday:</td>
                     <td><?php se($output, "sunday_open", "Not Available"); ?> - <?php se($output, "sunday_close", "Not Available"); ?></td>
                 </tr>
-            </table></li>
+            </table>
+        </li>
         <li class="list-group-item"><strong>Popular Tour Title: </strong><?php se($output, "popular_tour_title", "Unknown"); ?></li>
         <li class="list-group-item"><strong>Primary Category: </strong><?php se($output, "primary_category", "Unknown"); ?></li>
         <li class="list-group-item"><strong>Price: </strong><?php se($output, "price", "Unknown"); ?></li>
