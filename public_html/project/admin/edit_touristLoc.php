@@ -2,8 +2,8 @@
 //note we need to go up 1 more directory
 require(__DIR__ . "/../../../partials/nav.php");
 
-if (!has_role("Admin")) {
-    flash("You don't have permission to view this page", "warning");
+if (!has_role("Admin")) {                                               //UCID: LM457
+    flash("You don't have permission to view this page", "warning");    //DATE: 4/16/2024
     die(header("Location: $BASE_PATH" . "/home.php"));
 }
 ?>
@@ -14,15 +14,17 @@ $id = se($_GET, "id", -1, false);
 if (isset($_POST["NationalID"])) {
     $selectedPlace = [];
     foreach ($_POST as $key => $value) {
-        if (!in_array($key, ["NationalID", "name", "ranking", "description", "rating", "num_reviews", "website", "address", "phone", "write_review", "monday_open", "monday_close", "tuesday_open", "tuesday_close", "wednesday_open", "wednesday_close", "thursday_open", "thursday_close", "friday_open", "friday_close", "saturday_open", "saturday_close", "sunday_open", "sunday_close", "popular_tour_title", "primary_category", "price", "partner", "tour_url", "product_code"])) {
+        if (!in_array($key, ["NationalID", "name", "ranking", "description", "rating", "num_reviews", "website", "address", "phone", "write_review", "monday_open", "monday_close", "tuesday_open", "tuesday_close", "wednesday_open",
+         "wednesday_close", "thursday_open", "thursday_close", "friday_open", "friday_close", "saturday_open", "saturday_close", "sunday_open", "sunday_close", "popular_tour_title", "primary_category", "price", "partner", 
+         "tour_url", "product_code"])) {
             unset($_POST[$key]);
         }
         $selectedPlace = $_POST;
     }
     // PHP Server Side Validation for Empty Fields
     $hasError = false;
-    foreach ($selectedPlace as $k => $v) {
-        if (strlen($v) == 0) {
+    foreach ($selectedPlace as $k => $v) {                                  //UCID: LM457
+        if (strlen($v) == 0) {                                              //DATE: 4/16/2024
             flash("\"$k\" cannot be empty", "danger");
             $hasError = true;
         }
@@ -33,8 +35,8 @@ if (isset($_POST["NationalID"])) {
         $query = "UPDATE `tourist_info` SET ";
         $params = [];
         
-        foreach ($selectedPlace as $k => $v) {
-            if ($params) {
+        foreach ($selectedPlace as $k => $v) {                              //UCID: LM457
+            if ($params) {                                                  //DATE: 4/16/2024
                 $query .= ",";
             }
             $query .= "$k=:$k";
@@ -85,8 +87,8 @@ if ($output) {
         ["name" => "rating", "placeholder" => "Enter Location Rating", "label" => "Location Rating", "rules" => ["required" => "required"]],
         ["name" => "num_reviews", "placeholder" => "Enter Location Number of Reviews", "label" => "Location Number of Reviews", "rules" => ["required" => "required"]],
         ["name" => "website", "placeholder" => "Enter Location Website", "label" => "Location Website", "rules" => ["required" => "required"]],
-        ["name" => "address", "placeholder" => "Enter Location Address", "label" => "Location Address", "rules" => ["required" => "required"]],
-        ["name" => "phone", "placeholder" => "Enter Location Phone", "label" => "Location Phone", "rules" => ["required" => "required"]],
+        ["name" => "address", "placeholder" => "Enter Location Address", "label" => "Location Address", "rules" => ["required" => "required"]],                         //UCID: LM457
+        ["name" => "phone", "placeholder" => "Enter Location Phone", "label" => "Location Phone", "rules" => ["required" => "required"]],                               //DATE: 4/16/2024
         ["name" => "write_review", "placeholder" => "Enter Write a Review Link", "label" => "Write a Review Link", "rules" => ["required" => "required"]],
         ["name" => "monday_open", "placeholder" => "Enter Location Monday Open Time", "label" => "Location Monday Open Time", "rules" => ["required" => "required"]],
         ["name" => "monday_close", "placeholder" => "Enter Location Monday Close Time", "label" => "Location Monday Close Time", "rules" => ["required" => "required"]],
@@ -138,8 +140,8 @@ if ($output) {
                 { name: "website", label: "Location Website" },
                 { name: "address", label: "Location Address" },
                 { name: "phone", label: "Location Phone" },
-                { name: "write_review", label: "Write a Review Link" },
-                { name: "monday_open", label: "Location Monday Open Time" },
+                { name: "write_review", label: "Write a Review Link" },                         //UCID: LM457
+                { name: "monday_open", label: "Location Monday Open Time" },                    //DATE: 4/16/2024
                 { name: "monday_close", label: "Location Monday Close Time" },
                 { name: "tuesday_open", label: "Location Tuesday Open Time" },
                 { name: "tuesday_close", label: "Location Tuesday Close Time" },
@@ -182,13 +184,13 @@ if ($output) {
 </script>
 
 
-<div class="container-fluid">
-    <h3>Edit Tourist Location</h3>
+<div class="container-fluid">   
+    <h3>Edit Tourist Location</h3>          
     <div>
         <a href="<?php echo get_url("admin/list_touristLocs.php"); ?>" class="btn btn-secondary">Back</a>
-    </div>
-    <form method="POST">
-        <?php foreach ($form as $field) : ?>
+    </div>  
+    <form method="POST">                                            <!--UCID: LM457-->
+        <?php foreach ($form as $field) : ?>                        <!--DATE: 4/16/2024-->
             <?php render_input($field); ?>
         <?php endforeach; ?>
         <?php render_button(["text" => "Edit Tourist Place", "type" => "submit"]); ?>
