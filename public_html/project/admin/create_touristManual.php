@@ -2,8 +2,8 @@
 //note we need to go up 1 more directory
 require(__DIR__ . "/../../../partials/nav.php");
 
-if (!has_role("Admin")) {
-    flash("You don't have permission to view this page", "warning");
+if (!has_role("Admin")) {                                               //UCID: LM457
+    flash("You don't have permission to view this page", "warning");    //DATE: 4/16/2024
     die(header("Location: $BASE_PATH" . "/home.php"));
 }
 ?>
@@ -12,7 +12,9 @@ if (!has_role("Admin")) {
 if (isset($_POST["nationallocation_id"])) {
     $selectedPlace = [];
     foreach ($_POST as $key => $value) {
-        if (!in_array($key, ["nationallocation_id", "location_name", "location_ranking", "location_description", "location_rating", "location_num_reviews", "location_website", "location_address", "location_phone", "write_review_link", "location_monday_open", "location_monday_close", "location_tuesday_open", "location_tuesday_close", "location_wednesday_open", "location_wednesday_close", "location_thursday_open", "location_thursday_close", "location_friday_open", "location_friday_close", "location_saturday_open", "location_saturday_close", "location_sunday_open", "location_sunday_close", "location_popular_tours_title", "location_popular_tours_category", "location_popular_tour_price", "location_popular_tour_partner", "location_popular_tour_link", "location_popular_tour_code"])) {
+        if (!in_array($key, ["nationallocation_id", "location_name", "location_ranking", "location_description", "location_rating", "location_num_reviews", "location_website", "location_address", "location_phone", "write_review_link", "location_monday_open", "location_monday_close",
+         "location_tuesday_open", "location_tuesday_close", "location_wednesday_open", "location_wednesday_close", "location_thursday_open", "location_thursday_close", "location_friday_open", "location_friday_close", "location_saturday_open", "location_saturday_close", 
+         "location_sunday_open", "location_sunday_close", "location_popular_tours_title", "location_popular_tours_category", "location_popular_tour_price", "location_popular_tour_partner", "location_popular_tour_link", "location_popular_tour_code"])) {
             unset($_POST[$key]);
         }
         $selectedPlace = $_POST;

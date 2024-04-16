@@ -2,8 +2,8 @@
 //note we need to go up 1 more directory
 require(__DIR__ . "/../../../partials/nav.php");
 
-if (!has_role("Admin")) {
-    flash("You don't have permission to view this page", "warning");
+if (!has_role("Admin")) {                                                       //UCID: LM457
+    flash("You don't have permission to view this page", "warning");            //DATE: 4/16/2024
     die(header("Location: $BASE_PATH" . "/home.php"));
 }
 ?>
@@ -24,8 +24,10 @@ if (isset($_POST["nationallocation_id"])) {
     if ($selectedPlace) {
         $db = getDB();
 
-        $basicInfoQuery = "INSERT INTO `tourist_info` (`location_id`, `language`, `currency`, `NationalID`, `name`, `ranking`, `description`, `rating`, `num_reviews`, `website`, `address`, `phone`, `write_review`, `monday_open`, `monday_close`, `tuesday_open`, `tuesday_close`, `wednesday_open`, `wednesday_close`, `thursday_open`, `thursday_close`, `friday_open`, `friday_close`, `saturday_open`, `saturday_close`, `sunday_open`, `sunday_close`, `popular_tour_title`, `primary_category`, `price`, `partner`, `tour_url`, `product_code`, `is_api`) ";
-        $basicInfoQuery .= "VALUES (:location_id, :language, :currency, :nationalID, :name, :ranking, :description, :rating, :num_reviews, :website, :address, :phone, :write_review, :monday_open, :monday_close, :tuesday_open, :tuesday_close, :wednesday_open, :wednesday_close, :thursday_open, :thursday_close, :friday_open, :friday_close, :saturday_open, :saturday_close, :sunday_open, :sunday_close, :popular_tour_title, :primary_category, :price, :partner, :tour_url, :product_code, :is_api)";
+        $basicInfoQuery = "INSERT INTO `tourist_info` (`location_id`, `language`, `currency`, `NationalID`, `name`, `ranking`, `description`, `rating`, `num_reviews`, `website`, `address`, `phone`, `write_review`, `monday_open`, `monday_close`, `tuesday_open`, `tuesday_close`, 
+        `wednesday_open`, `wednesday_close`, `thursday_open`, `thursday_close`, `friday_open`, `friday_close`, `saturday_open`, `saturday_close`, `sunday_open`, `sunday_close`, `popular_tour_title`, `primary_category`, `price`, `partner`, `tour_url`, `product_code`, `is_api`) ";
+        $basicInfoQuery .= "VALUES (:location_id, :language, :currency, :nationalID, :name, :ranking, :description, :rating, :num_reviews, :website, :address, :phone, :write_review, :monday_open, :monday_close, :tuesday_open, :tuesday_close, :wednesday_open, :wednesday_close, 
+        :thursday_open, :thursday_close, :friday_open, :friday_close, :saturday_open, :saturday_close, :sunday_open, :sunday_close, :popular_tour_title, :primary_category, :price, :partner, :tour_url, :product_code, :is_api)";
 
         try {
             $stmt = $db->prepare($basicInfoQuery);
