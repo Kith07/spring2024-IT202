@@ -44,9 +44,7 @@ foreach ($output as $key => $value) {
     <div>
         <a href="<?php echo get_url("admin/list_touristLocs.php"); ?>" class="btn btn-secondary">Back</a>
         <a href="<?php echo get_url("admin/edit_touristLoc.php?id=" . $id); ?>" class="btn btn-primary">Edit</a>
-        <form method="POST" action="<?php echo get_url("admin/delete_touristLocs.php?id=" . $id); ?>" style="display: inline-block;">
-            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this record?')">Delete</button>
-        </form>
+        <a href="<?php echo get_url("admin/delete_touristLocs.php?id=" . $id); ?>" class="btn btn-danger">Delete</a>
 
     </div>
     <ul class="list-group">
