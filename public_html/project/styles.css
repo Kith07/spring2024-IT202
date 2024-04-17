@@ -1,48 +1,16 @@
-.alert-success {
-    background-color: #4CAF50;
-    color: #FFF;
-    padding: 10px 15px;
-}
-
-.alert-warning {
-    background-color: #FFC107;
-    color: #333;
-    padding: 10px 15px;
-    border-radius: 8px;
-}
-
-.alert-danger {
-    background-color: #F44336; 
-    color: #FFF;
-    padding: 10px 15px;
-    border-radius: 8px;
-}
-
-.alert-info {
-    background-color: #2196F3;
-    color: #FFF;
-    padding: 10px 15px;
-    border-radius: 8px;
-}
-
 nav li {
-    display: inline-block;
+    display: inline;
     background-color: #3498DB; 
-    padding: 10px 15px;
-    margin-right: 20px;
-    border-radius: 8px;
 }
 
 nav li a {
     color: #333;
-    text-decoration: none;
 }
 
 input {
     border-radius: 8px;
     border: 2px solid #3498DB;
     padding: 8px 12px;
-    margin: 5px 0;
 }
 
 body {
@@ -54,4 +22,9 @@ body {
 
 .password-reset {
     font-weight: bold;
+}
+
+.nav-link {
+    color: #ECF0F1 !important;
+    text-decoration: none;
 }
