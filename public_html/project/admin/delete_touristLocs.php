@@ -3,8 +3,8 @@
 session_start();
 require(__DIR__ . "/../../../lib/functions.php");
 if (!has_role("Admin")) {
-    flash("You don't have permission to view this page", "warning");
-    die(header("Location: $BASE_PATH" . "/home.php"));
+    flash("You don't have permission to view this page", "warning");        //UCID: LM457
+    die(header("Location: $BASE_PATH" . "/home.php"));                      //DATE: 4/16/2024
 }
 
 $id = se($_GET, "id", -1, false);
