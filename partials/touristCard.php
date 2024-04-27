@@ -3,18 +3,17 @@ if (!isset($output)) {
     error_log("Using output partial without data");
     flash("Dev Alert: output called without data", "danger");
 }
-$id = se($_GET, "id", -1, false); 
 ?>
 <?php if (isset($output)) : ?>
-        <div class="card mx-auto" style="width: 18rem;">
+    <div class="card mx-auto" style="width: 18rem;">
         <div class="card-body">
-            <h5 class="card-title"><?php se($output, "name", "Unknown"); ?> <?php se($output, "rarity"); ?></h5>
+            <h5 class="card-title"><strong><?php se($output, "name", "Unknown") ?></strong> <?php se($output, "rarity"); ?></h5>
             <div class="card-text">
-                <div>
-                    <a href="<?php echo get_url("admin/edit_touristLoc.php?id=" . $id); ?>" class="btn btn-primary">Edit</a>
+                <!-- <div>
+                    <a href="<?php echo get_url("admin/viewLocations.php?id=" . $id); ?>" class="btn btn-primary">View</a>
                     <a href="<?php echo get_url("admin/delete_touristLocs.php?id=" . $id); ?>" class="btn btn-danger">Delete</a>
 
-                </div>
+                </div> -->
                 <ul class="list-group">
                     <li class="list-group-item"><strong>National ID: </strong> <?php se($output, "NationalID", "Unknown"); ?></li>
                     <li class="list-group-item"><strong>Name:</strong> <?php se($output, "name", "Unknown"); ?></li>
@@ -22,8 +21,8 @@ $id = se($_GET, "id", -1, false);
                     <li class="list-group-item"><strong>Rating:</strong> <?php se($output, "rating", "Unknown"); ?></li>
                     <li class="list-group-item"><strong>Number of Reviews:</strong> <?php se($output, "num_reviews", "Unknown"); ?></li>
                     <li class="list-group-item"><strong>Website: </strong><?php se($output, "website", "Unknown"); ?></li>
-                    <li class="list-group-item"><strong>Address: </strong><?php se($output, "address", "Unknown"); ?></li> <!--UCID: LM457-->
-                    <li class="list-group-item"><strong>Phone: </strong><?php se($output, "phone", "Unknown"); ?></li> <!--DATE: 4/16/2024-->
+                    <li class="list-group-item"><strong>Address: </strong><?php se($output, "address", "Unknown"); ?></li>
+                    <li class="list-group-item"><strong>Phone: </strong><?php se($output, "phone", "Unknown"); ?></li>
                     <li class="list-group-item"><strong>Write Review: </strong><?php se($output, "write_review", "Unknown"); ?></li>
                     <li class="list-group-item"><strong>Timings: </strong><br><br>
                         <table>
@@ -70,19 +69,15 @@ $id = se($_GET, "id", -1, false);
                 </ul>
 
             </div>
+                <?php if (!isset($output["user_id"]) || $output["user_id"] === "N/A") : ?>
+                    <div class="card-body">
+                        <a href="<?php echo get_url('api/bucketList_locations.php?places_id=' . $output["id"]); ?>" class="card-link">Add to Travel Bucket List</a>
+                    </div>
+                <?php else : ?>
+                    <div class="card-body">
+                        <div class="bg-warning text-dark text-center">Output not available</div>
+                    </div>
+                <?php endif; ?>
+            <?php endif; ?>
         </div>
-
     </div>
-
-    <?php if (!isset($output["user_id"]) || $output["user_id"] === "N/A") : ?>
-        <div class="card-body">
-            <a href="<?php echo get_url('api/purchase_output.php?output_id=' . $output["id"]); ?>" class="card-link">Purchase output</a>
-        </div>
-    <?php else : ?>
-        <div class="card-body">
-            <div class="bg-warning text-dark text-center">output not available</div>
-        </div>
-    <?php endif; ?>
-    </div>
-    </div>
-<?php endif; ?>

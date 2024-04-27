@@ -24,7 +24,7 @@ if ($id > -1) {
     }
 } else {
     flash("Invalid ID passed", "warning");
-    die(header("Location: " . get_url("locations.php")));
+    redirect("locations.php");
 }
 
 foreach ($output as $key => $value) {

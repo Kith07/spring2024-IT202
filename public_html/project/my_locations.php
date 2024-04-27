@@ -1,13 +1,7 @@
 <?php
 //note we need to go up 1 more directory
-require(__DIR__ . "/../../../partials/nav.php");
+require(__DIR__ . "/../../partials/nav.php");
 
-if (!has_role("Admin")) {
-    flash("You don't have permission to view this page", "warning");            //UCID: LM457
-    redirect("home.php");                            //DATE: 4/16/2024
-}
-?>
-<?php
 
 // Form Search
 $form = [
@@ -28,9 +22,9 @@ $form = [
     ["type" => "number", "name" => "limit", "label" => "Limit", "value" => "10", "include_margin" => false],
 ];
 
-$query = "SELECT id, location_id, language, currency, NationalID, name, ranking, description, rating, num_reviews, website, address, phone, write_review, monday_open, monday_close, tuesday_open, tuesday_close, wednesday_open, wednesday_close, thursday_open, thursday_close, 
-friday_open, friday_close, saturday_open, saturday_close, sunday_open, sunday_close, popular_tour_title, primary_category, price, partner, tour_url, product_code, is_api, created  FROM `tourist_info` WHERE 1=1";
-$params = [];
+$query = "SELECT t.id, location_id, language, currency, NationalID, name, ranking, description, rating, num_reviews, website, address, phone, write_review, monday_open, monday_close, tuesday_open, tuesday_close, wednesday_open, wednesday_close, thursday_open, thursday_close, 
+friday_open, friday_close, saturday_open, saturday_close, sunday_open, sunday_close, popular_tour_title, primary_category, price, partner, tour_url, product_code, is_api, t.created, user_id  FROM `tourist_info` t JOIN `UserLocations` ut ON t.id = ut.places_id WHERE user_id = :user_id";
+$params = [":user_id" => get_user_id()];
 $session_key = $_SERVER["SCRIPT_NAME"];
 $is_clear = isset($_GET["clear"]);
 if ($is_clear) {
@@ -94,6 +88,10 @@ if (count($_GET) > 0) {
     if (!in_array($sort, ["rating", "num_reviews"])) {
         $sort = "created";
     }
+    if ($sort === "created" || $sort === "modified") {
+        $sort = "t." . $sort;
+    }
+
     $order = se($_GET, "order", "desc", false);
     if (!in_array($order, ["asc", "desc"])) {
         $order = "desc";
@@ -129,16 +127,15 @@ try {
 }
 
 $table = ["data" => $results, "title" => "List of Tourist Locations Data", "ignored_columns" => ["id", "location_id", "language", "currency", "description", "write_review", "monday_open", "monday_close", "tuesday_open", "tuesday_close", "wednesday_open", "wednesday_close", 
-"thursday_open", "thursday_close", "friday_open", "friday_close", "saturday_open", "saturday_close", "sunday_open", "sunday_close", "popular_tour_title", "primary_category", "price", "partner", "tour_url", "product_code", "is_api"], "edit_url" => get_url("admin/edit_touristLoc.php"),
- "delete_url" => get_url("admin/delete_touristLocs.php"), "view_url" => get_url("admin/view_locationDetails.php")];
+"thursday_open", "thursday_close", "friday_open", "friday_close", "saturday_open", "saturday_close", "sunday_open", "sunday_close", "popular_tour_title", "primary_category", "price", "partner", "tour_url", "product_code", "is_api"], "view_url" => get_url("viewLocations.php")];
 ?>
 
 <div class="container-fluid">
-<h3>Tourist Locations Filter</h3>
+<h3>My Travel Bucket List</h3>
     <form method="GET">
         <div class = "row mb-3" style = "align-items: space-around;">
-            <?php foreach ($form as $k => $v) : ?>                              <!--UCID: LM457-->
-                <div class = "col">                                             <!--DATE: 4/16/2024-->                       
+            <?php foreach ($form as $k => $v) : ?>                             
+                <div class = "col">                                                                   
                     <?php render_input($v); ?>
                 </div>
                 <?php endforeach; ?>
@@ -146,10 +143,16 @@ $table = ["data" => $results, "title" => "List of Tourist Locations Data", "igno
         <?php render_button(["text" => "Filter", "type" => "submit"]); ?>
         <a href="?clear" class="btn btn-secondary">Clear</a>
     </form>
-    <?php render_table($table); ?>
+    <div class="row w-100 row-cols-auto row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-5 g-4">
+        <?php foreach ($results as $broker) : ?>
+            <div class="col">
+                <?php render_tourist_card($broker); ?>
+            </div>
+        <?php endforeach; ?>
+    </div>
 </div>
 
 <?php
 //note we need to go up 1 more directory
-require_once(__DIR__ . "/../../../partials/flash.php");
+require_once(__DIR__ . "/../../partials/flash.php");
 ?>

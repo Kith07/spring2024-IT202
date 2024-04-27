@@ -4,13 +4,13 @@ session_start();
 require(__DIR__ . "/../../../lib/functions.php");
 if (!has_role("Admin")) {
     flash("You don't have permission to view this page", "warning");        //UCID: LM457
-    die(header("Location: $BASE_PATH" . "/home.php"));                      //DATE: 4/16/2024
+    redirect("home.php");                   //DATE: 4/16/2024
 }
 
 $id = se($_GET, "id", -1, false);
 if ($id < 1) {
     flash("Invalid ID passed. Cannot delete", "danger");
-    die(header("Location: " . get_url("admin/list_touristLocs.php")));
+    redirect("admin/list_touristLocs.php");
 }
 
 $db = getDB();
@@ -23,4 +23,4 @@ try {
     error_log("Error deleting Tourist Location $id" . var_export($e, true));
     flash("Error deleting record", "danger");
 }
-die(header("Location: " . get_url("admin/list_touristLocs.php")));
+redirect("admin/list_touristLocs.php");
