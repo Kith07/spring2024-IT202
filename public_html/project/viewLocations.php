@@ -1,11 +1,6 @@
 <?php
-//note we need to go up 1 more directory
-require(__DIR__ . "/../../../partials/nav.php");
+require(__DIR__ . "/../../partials/nav.php");
 
-if (!has_role("Admin")) {
-    flash("You don't have permission to view this page", "warning");
-    die(header("Location: $BASE_PATH" . "/home.php"));
-}
 ?>
 
 <?php
@@ -29,7 +24,7 @@ if ($id > -1) {
     }
 } else {
     flash("Invalid ID passed", "warning");
-    die(header("Location: " . get_url("admin/list_touristLocs.php")));
+    die(header("Location: " . get_url("locations.php")));
 }
 
 foreach ($output as $key => $value) {
@@ -42,7 +37,7 @@ foreach ($output as $key => $value) {
 <div class="container-fluid">
     <h3>Location: <?php se($output, "name", "Unknown"); ?></h3>
     <div>
-        <a href="<?php echo get_url("admin/list_touristLocs.php"); ?>" class="btn btn-secondary">Back</a>
+        <a href="<?php echo get_url("locations.php"); ?>" class="btn btn-secondary">Back</a>
     </div>
 
     <?php render_tourist_card($output); ?>
@@ -50,5 +45,5 @@ foreach ($output as $key => $value) {
 </div>
 <?php
 //note we need to go up 1 more directory
-require_once(__DIR__ . "/../../../partials/flash.php");
+require_once(__DIR__ . "/../../partials/flash.php");
 ?>
