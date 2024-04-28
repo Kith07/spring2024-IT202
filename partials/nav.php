@@ -43,6 +43,7 @@ session_start();
                     <li class="nav-item"><a class="nav-link" href="<?php echo get_url('home.php'); ?>">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="<?php echo get_url('profile.php'); ?>">Profile</a></li>
                     <li class="nav-item"><a class="nav-link" href="<?php echo get_url('locations.php'); ?>">Locations</a></li>
+                    <li class="nav-item"><a class="nav-link" href="<?php echo get_url('available_Locations.php'); ?>">Available Locations</a></li>
                     <li class="nav-item"><a class="nav-link" href="<?php echo get_url('my_locations.php'); ?>">My Travel Bucket List</a></li>
                 <?php endif; ?>
                 <?php if (!is_logged_in()) : ?>
