@@ -1,10 +1,16 @@
 <?php
 //note we need to go up 1 more directory
-require(__DIR__ . "/../../partials/nav.php");
+require(__DIR__ . "/../../../partials/nav.php");
 
+if (!has_role("Admin")) {
+    flash("You don't have permission to view this page", "warning");
+    redirect("home.php");
+}
 
 // Form Search
 $form = [
+    ["type" => "text", "name" => "username", "placeholder" => "Username Search", "label" => "Username Search", "include_margin" => false],
+
     ["type" => "number", "name" => "NationalID", "placeholder" => "ID Search", "label" => "ID Search", "include_margin" => false],
 
     ["type" => "text", "name" => "name", "placeholder" => "Name Search", "label" => "Name Search", "include_margin" => false],
@@ -22,9 +28,10 @@ $form = [
     ["type" => "number", "name" => "limit", "label" => "Limit", "value" => "10", "include_margin" => false],
 ];
 
-$total_records = get_total_count("tourist_info t LEFT JOIN `UserLocations` ut on t.id = ut.places_id");
-$query = "SELECT t.id, location_id, language, currency, NationalID, name, ranking, description, rating, num_reviews, website, address, phone, write_review, monday_open, monday_close, tuesday_open, tuesday_close, wednesday_open, wednesday_close, thursday_open, thursday_close, 
-friday_open, friday_close, saturday_open, saturday_close, sunday_open, sunday_close, popular_tour_title, primary_category, price, partner, tour_url, product_code, is_api, t.created, ut.user_id  FROM `tourist_info` t LEFT JOIN `UserLocations` ut on t.id = ut.places_id WHERE 1=1";
+$total_records = get_total_count("tourist_info t JOIN `UserLocations` ut ON t.id = ut.places_id");
+
+$query = "SELECT u.username, t.id, location_id, language, currency, NationalID, name, ranking, description, rating, num_reviews, website, address, phone, write_review, monday_open, monday_close, tuesday_open, tuesday_close, wednesday_open, wednesday_close, thursday_open, thursday_close, 
+friday_open, friday_close, saturday_open, saturday_close, sunday_open, sunday_close, popular_tour_title, primary_category, price, partner, tour_url, product_code, is_api, t.created, user_id  FROM `tourist_info` t JOIN `UserLocations` ut ON t.id = ut.places_id JOIN `Users` u ON u.id = ut.user_id";
 $params = [];
 $session_key = $_SERVER["SCRIPT_NAME"];
 $is_clear = isset($_GET["clear"]);
@@ -50,6 +57,14 @@ if (count($_GET) > 0) {
             $form[$k]["value"] = $_GET[$v["name"]];                                     //DATE: 4/16/2024
         }
     }
+
+    //username
+    $username = se($_GET, "username", "", false);
+    if (!empty($username)) {
+        $query .= " AND u.username like :username";
+        $params[":username"] = "%$username%";
+    }
+
     //NationalID
     if (!empty($_GET["NationalID"])) {
         $query .= " AND NationalID LIKE :NationalID";
@@ -92,6 +107,7 @@ if (count($_GET) > 0) {
     if ($sort === "created" || $sort === "modified") {
         $sort = "t." . $sort;
     }
+
     $order = se($_GET, "order", "desc", false);
     if (!in_array($order, ["asc", "desc"])) {
         $order = "desc";
@@ -131,9 +147,9 @@ $table = ["data" => $results, "title" => "List of Tourist Locations Data", "igno
 ?>
 
 <div class="container-fluid">
-<h3>Tourist Locations Filter</h3>
+<h3>My Travel Bucket List</h3>
     <form method="GET">
-        <div class = "row mb-3" style = "align-items: space-around;">
+        <div class = "row mb-3" style = "align-items: flex-end;">
             <?php foreach ($form as $k => $v) : ?>                             
                 <div class = "col">                                                                   
                     <?php render_input($v); ?>
@@ -160,5 +176,5 @@ $table = ["data" => $results, "title" => "List of Tourist Locations Data", "igno
 
 <?php
 //note we need to go up 1 more directory
-require_once(__DIR__ . "/../../partials/flash.php");
+require_once(__DIR__ . "/../../../partials/flash.php");
 ?>

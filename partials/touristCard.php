@@ -6,6 +6,11 @@ if (!isset($output)) {
 ?>
 <?php if (isset($output)) : ?>
     <div class="card mx-auto" style="width: 18rem;">
+        <?php if (isset($output["username"])) : ?>
+            <div class="card-header">
+                Favorited By: <?php se($output, "username", "N/A"); ?>
+            </div>
+        <?php endif; ?>
         <div class="card-body">
             <h5 class="card-title"><strong><?php se($output, "name", "Unknown") ?></strong> <?php se($output, "rarity"); ?></h5>
             <div class="card-text">
@@ -69,15 +74,15 @@ if (!isset($output)) {
                 </ul>
 
             </div>
-                <?php if (!isset($output["user_id"]) || $output["user_id"] === "N/A") : ?>
-                    <div class="card-body">
-                        <a href="<?php echo get_url('api/bucketList_locations.php?places_id=' . $output["id"]); ?>" class="card-link">Add to Travel Bucket List</a>
-                    </div>
-                <?php else : ?>
-                    <div class="card-body">
-                        <div class="bg-warning text-dark text-center">Output not available</div>
-                    </div>
-                <?php endif; ?>
+            <?php if (!isset($output["user_id"]) || $output["user_id"] === "N/A") : ?>
+                <div class="card-body">
+                    <a href="<?php echo get_url('api/bucketList_locations.php?places_id=' . $output["id"]); ?>" class="card-link">Add to Travel Bucket List</a>
+                </div>
+            <?php else : ?>
+                <div class="card-body">
+                    <div class="bg-warning text-dark text-center">Output not available</div>
+                </div>
             <?php endif; ?>
+        <?php endif; ?>
         </div>
     </div>

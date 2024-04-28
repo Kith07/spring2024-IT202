@@ -22,6 +22,8 @@ $form = [
     ["type" => "number", "name" => "limit", "label" => "Limit", "value" => "10", "include_margin" => false],
 ];
 
+$total_records = get_total_count("tourist_info t JOIN `UserLocations` ut ON t.id = ut.places_id WHERE user_id = :user_id", [":user_id" => get_user_id()]);
+
 $query = "SELECT t.id, location_id, language, currency, NationalID, name, ranking, description, rating, num_reviews, website, address, phone, write_review, monday_open, monday_close, tuesday_open, tuesday_close, wednesday_open, wednesday_close, thursday_open, thursday_close, 
 friday_open, friday_close, saturday_open, saturday_close, sunday_open, sunday_close, popular_tour_title, primary_category, price, partner, tour_url, product_code, is_api, t.created, user_id  FROM `tourist_info` t JOIN `UserLocations` ut ON t.id = ut.places_id WHERE user_id = :user_id";
 $params = [":user_id" => get_user_id()];
@@ -143,12 +145,18 @@ $table = ["data" => $results, "title" => "List of Tourist Locations Data", "igno
         <?php render_button(["text" => "Filter", "type" => "submit"]); ?>
         <a href="?clear" class="btn btn-secondary">Clear</a>
     </form>
+    <?php render_result_counts(count($results), $total_records); ?>
     <div class="row w-100 row-cols-auto row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-5 g-4">
         <?php foreach ($results as $broker) : ?>
             <div class="col">
                 <?php render_tourist_card($broker); ?>
             </div>
         <?php endforeach; ?>
+        <?php if (count($results) === 0) : ?>
+            <div class="col">
+                No results to show
+            </div>
+        <?php endif; ?>
     </div>
 </div>
 
