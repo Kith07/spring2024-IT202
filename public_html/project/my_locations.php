@@ -37,9 +37,12 @@ $form = [
 
 $total_records = get_total_count("tourist_info t JOIN `UserLocations` ut ON t.id = ut.places_id WHERE user_id = :user_id", [":user_id" => get_user_id()]);
 
-$query = "SELECT t.id, location_id, language, currency, NationalID, name, ranking, description, rating, num_reviews, website, address, phone, write_review, monday_open, monday_close, tuesday_open, tuesday_close, wednesday_open, wednesday_close, thursday_open, thursday_close, 
-friday_open, friday_close, saturday_open, saturday_close, sunday_open, sunday_close, popular_tour_title, primary_category, price, partner, tour_url, product_code, is_api, t.created, user_id  FROM `tourist_info` t JOIN `UserLocations` ut ON t.id = ut.places_id WHERE user_id = :user_id";
-$params = [":user_id" => get_user_id()];
+$query = "SELECT username, t.id, location_id, language, currency, NationalID, name, ranking, description, rating, num_reviews, website, address, phone, write_review, monday_open, monday_close, tuesday_open, tuesday_close, wednesday_open, wednesday_close, thursday_open, thursday_close, 
+friday_open, friday_close, saturday_open, saturday_close, sunday_open, sunday_close, popular_tour_title, primary_category, price, partner, tour_url, product_code, is_api, t.created, user_id,
+IF (ut.user_id = :current_user_id, 1, 0) AS is_favorite FROM `tourist_info` t JOIN `UserLocations` ut ON t.id = ut.places_id LEFT JOIN Users u ON u.id = ut.user_id WHERE user_id = :user_id";
+
+$params = [':current_user_id' => get_user_id(), ":user_id" => get_user_id()];
+
 $session_key = $_SERVER["SCRIPT_NAME"];
 $is_clear = isset($_GET["clear"]);
 if ($is_clear) {
