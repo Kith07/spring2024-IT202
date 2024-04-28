@@ -19,3 +19,8 @@ function render_tourist_card($output = array())
 {
     include(__DIR__ . "/../partials/touristCard.php");
 }
+
+function render_result_counts($result_count, $total_count)
+{
+    include(__DIR__ . "/../partials/result_counts.php");
+}

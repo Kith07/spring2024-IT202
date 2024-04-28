@@ -31,5 +31,7 @@ require(__DIR__ . "/api_helper.php");
 
 require(__DIR__ . "/touristAPI.php");
 
+require(__DIR__ . "/db_helpers.php");
+
 require(__DIR__ . "/session_store.php");
 ?>
