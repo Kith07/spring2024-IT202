@@ -147,7 +147,7 @@ $table = ["data" => $results, "title" => "List of Tourist Locations Data", "igno
 ?>
 
 <div class="container-fluid">
-<h3>My Travel Bucket List</h3>
+<h3>Favorited Travel Locations (Associated)</h3>
     <form method="GET">
         <div class = "row mb-3" style = "align-items: flex-end;">
             <?php foreach ($form as $k => $v) : ?>                             

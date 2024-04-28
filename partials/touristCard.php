@@ -69,15 +69,21 @@ if (!isset($output)) {
                 </ul>
 
             </div>
-            <?php if (!isset($output["user_id"]) || $output["user_id"] === "N/A") : ?>
-                <div class="card-body">
-                    <a href="<?php echo get_url('api/bucketList_locations.php?places_id=' . $output["id"]); ?>" class="card-link">Add to Travel Bucket List</a>
-                </div>
-            <?php else : ?>
-                <div class="card-body">
-                    <div class="bg-warning text-dark text-center">Output not available</div>
-                </div>
+            <div class="card body">
+                <?php if (isset($output["id"])) : ?>
+                    <a class="btn btn-secondary" href="<?php echo get_url("viewLocations.php?id=" . $output["id"]); ?>">View</a>
+                <?php endif; ?>
+                <?php if ($output["is_favorite"] = 1 || $output["user_id"] === "N/A") : ?>
+                    <div class="card-body">
+                        <?php $id = isset($output["id"]) ? $output["id"] : (isset($_GET["id"]) ? $_GET["id"] : -1);?>
+                        <a href="<?php echo get_url('api/bucketList_locations.php?places_id=' . $output["id"]); ?>" class="card-link">Add to Travel Bucket List</a>
+                    </div>
+                <?php else : ?>
+                    <div class="card-body">
+                        <div class="bg-warning text-dark text-center">Output not available</div>
+                    </div>
+                <?php endif; ?>
             <?php endif; ?>
-        <?php endif; ?>
+            </div>
         </div>
     </div>

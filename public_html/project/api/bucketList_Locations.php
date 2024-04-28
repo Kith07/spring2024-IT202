@@ -12,9 +12,10 @@ if (isset($_GET["places_id"]) && is_logged_in()) {
         $stmt = $db->prepare($query);
         $stmt->execute([":user_id" => get_user_id(), ":places_id" => $_GET["places_id"]]);
         flash("Congrats you added this location to your Travel Bucket List!", "success");
+        redirect("my_locations.php");
     } catch (PDOException $e) {
         if ($e->errorInfo[1] === 1062) {
-            flash("This location isn't available", "danger");
+            flash("This location has already been favorited", "danger");
         } else {
             flash("Unhandled error occurred", "danger");
         }

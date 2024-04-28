@@ -24,8 +24,9 @@ $form = [
 
 $total_records = get_total_count("tourist_info t LEFT JOIN `UserLocations` ut on t.id = ut.places_id");
 $query = "SELECT u.username, t.id, location_id, language, currency, NationalID, name, ranking, description, rating, num_reviews, website, address, phone, write_review, monday_open, monday_close, tuesday_open, tuesday_close, wednesday_open, wednesday_close, thursday_open, thursday_close, 
-friday_open, friday_close, saturday_open, saturday_close, sunday_open, sunday_close, popular_tour_title, primary_category, price, partner, tour_url, product_code, is_api, t.created, ut.user_id  FROM `tourist_info` t LEFT JOIN `UserLocations` ut on t.id = ut.places_id LEFT JOIN Users u on u.id = ut.user_id
+friday_open, friday_close, saturday_open, saturday_close, sunday_open, sunday_close, popular_tour_title, primary_category, price, partner, tour_url, product_code, is_api, t.created, ut.user_id, IF(ut.user_id IS NOT NULL, 0, 1) AS is_favorite  FROM `tourist_info` t LEFT JOIN `UserLocations` ut on t.id = ut.places_id LEFT JOIN Users u on u.id = ut.user_id
 WHERE 1=1";
+
 $params = [];
 $session_key = $_SERVER["SCRIPT_NAME"];
 $is_clear = isset($_GET["clear"]);
