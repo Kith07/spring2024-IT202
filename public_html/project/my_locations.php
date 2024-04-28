@@ -1,7 +1,20 @@
 <?php
-//note we need to go up 1 more directory
 require(__DIR__ . "/../../partials/nav.php");
+$db = getDB();
+//remove all associations
+if (isset($_GET["remove"])) {
+    $query = "DELETE FROM `UserLocations` WHERE user_id = :user_id";
+    try {
+        $stmt = $db->prepare($query);
+        $stmt->execute([":user_id" => get_user_id()]);
+        flash("Successfully removed all brokers", "success");
+    } catch (PDOException $e) {
+        error_log("Error removing broker associations: " . var_export($e, true));
+        flash("Error removing broker associations", "danger");
+    }
 
+    redirect("my_locations.php");
+}
 
 // Form Search
 $form = [
@@ -10,7 +23,7 @@ $form = [
     ["type" => "text", "name" => "name", "placeholder" => "Name Search", "label" => "Name Search", "include_margin" => false],
 
     ["type" => "decimal", "name" => "min_rating", "placeholder" => "Minimum Rating", "label" => "Minimum Rating", "pattern" => "\d*\.?\d*", "include_margin" => false],         //UCID: LM457
-                                                                                                                                                                                //DATE: 4/16/2024     
+    //DATE: 4/16/2024     
     ["type" => "number", "name" => "min_num_reviews", "placeholder" => "Minimum Reviews", "label" => "Minimum Reviews", "include_margin" => false],
 
     ["type" => "date", "name" => "date_min", "placeholder" => "Minimum Date", "label" => "Minimum Date", "include_margin" => false],
@@ -54,8 +67,9 @@ if (count($_GET) > 0) {
     //NationalID
     if (!empty($_GET["NationalID"])) {
         $query .= " AND NationalID LIKE :NationalID";
-        $params[":NationalID"] = "%" . $_GET["NationalID"] . "%";}
-    
+        $params[":NationalID"] = "%" . $_GET["NationalID"] . "%";
+    }
+
     //Name
     if (!empty($_GET["name"])) {
         $query .= " AND name LIKE :name";
@@ -114,7 +128,6 @@ if (count($_GET) > 0) {
     $query .= " LIMIT $limit";
 }
 
-$db = getDB();
 $stmt = $db->prepare($query);
 $results = [];
 try {
@@ -128,22 +141,27 @@ try {
     flash("An error occurred, please try again", "danger");
 }
 
-$table = ["data" => $results, "title" => "List of Tourist Locations Data", "ignored_columns" => ["id", "location_id", "language", "currency", "description", "write_review", "monday_open", "monday_close", "tuesday_open", "tuesday_close", "wednesday_open", "wednesday_close", 
-"thursday_open", "thursday_close", "friday_open", "friday_close", "saturday_open", "saturday_close", "sunday_open", "sunday_close", "popular_tour_title", "primary_category", "price", "partner", "tour_url", "product_code", "is_api"], "view_url" => get_url("viewLocations.php")];
+$table = ["data" => $results, "title" => "List of Tourist Locations Data", "ignored_columns" => [
+    "id", "location_id", "language", "currency", "description", "write_review", "monday_open", "monday_close", "tuesday_open", "tuesday_close", "wednesday_open", "wednesday_close",
+    "thursday_open", "thursday_close", "friday_open", "friday_close", "saturday_open", "saturday_close", "sunday_open", "sunday_close", "popular_tour_title", "primary_category", "price", "partner", "tour_url", "product_code", "is_api"
+], "view_url" => get_url("viewLocations.php")];
 ?>
 
 <div class="container-fluid">
-<h3>My Travel Bucket List</h3>
+    <h3>My Travel Bucket List</h3>
     <form method="GET">
-        <div class = "row mb-3" style = "align-items: space-around;">
-            <?php foreach ($form as $k => $v) : ?>                             
-                <div class = "col">                                                                   
+        <div class="row mb-3" style="align-items: center;">
+            <?php foreach ($form as $k => $v) : ?>
+                <div class="col">
                     <?php render_input($v); ?>
                 </div>
-                <?php endforeach; ?>
+            <?php endforeach; ?>
         </div>
-        <?php render_button(["text" => "Filter", "type" => "submit"]); ?>
-        <a href="?clear" class="btn btn-secondary">Clear</a>
+        <div style="display: flex-end; align-items: center;">
+            <?php render_button(["text" => "Filter", "type" => "submit"]); ?>
+            <a href="?clear" class="btn btn-secondary ml-2">Clear</a>
+            <a href="?remove" onclick="confirm('Are you sure?')?'':event.preventDefault()" class="btn btn-danger ml-2">Remove All Brokers</a>
+        </div>
     </form>
     <?php render_result_counts(count($results), $total_records); ?>
     <div class="row w-100 row-cols-auto row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-5 g-4">

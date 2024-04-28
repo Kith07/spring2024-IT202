@@ -14,11 +14,6 @@ if (!isset($output)) {
         <div class="card-body">
             <h5 class="card-title"><strong><?php se($output, "name", "Unknown") ?></strong> <?php se($output, "rarity"); ?></h5>
             <div class="card-text">
-                <!-- <div>
-                    <a href="<?php echo get_url("admin/viewLocations.php?id=" . $id); ?>" class="btn btn-primary">View</a>
-                    <a href="<?php echo get_url("admin/delete_touristLocs.php?id=" . $id); ?>" class="btn btn-danger">Delete</a>
-
-                </div> -->
                 <ul class="list-group">
                     <li class="list-group-item"><strong>National ID: </strong> <?php se($output, "NationalID", "Unknown"); ?></li>
                     <li class="list-group-item"><strong>Name:</strong> <?php se($output, "name", "Unknown"); ?></li>
