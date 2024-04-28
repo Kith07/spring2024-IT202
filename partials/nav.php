@@ -53,12 +53,13 @@ session_start();
                 <?php if (has_role("Admin")) : ?>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Roles
+                            Admin
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="<?php echo get_url('admin/create_role.php'); ?>">Create Role</a></li>
                             <li><a class="dropdown-item" href="<?php echo get_url('admin/list_roles.php'); ?>">List Roles</a></li>
                             <li><a class="dropdown-item" href="<?php echo get_url('admin/assign_roles.php'); ?>">Assign Roles</a></li>
+                            <li><a class="dropdown-item" href="<?php echo get_url('admin/assign_Locations.php'); ?>">Assign Favorite Locations</a></li>
                         </ul>
                     </li>
                 <?php endif; ?>
