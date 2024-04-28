@@ -9,15 +9,15 @@ if (!has_role("Admin")) {
 
 // Form Search
 $form = [
-    ["type" => "text", "name" => "username", "placeholder" => "Username Search", "label" => "Username Search", "include_margin" => false],
+    ["type" => "text", "name" => "username", "placeholder" => "Username Search", "label" => "Username", "include_margin" => false],
 
     ["type" => "number", "name" => "NationalID", "placeholder" => "ID Search", "label" => "ID Search", "include_margin" => false],
 
     ["type" => "text", "name" => "name", "placeholder" => "Name Search", "label" => "Name Search", "include_margin" => false],
 
-    ["type" => "decimal", "name" => "min_rating", "placeholder" => "Minimum Rating", "label" => "Minimum Rating", "pattern" => "\d*\.?\d*", "include_margin" => false],         //UCID: LM457
+    ["type" => "decimal", "name" => "min_rating", "placeholder" => "Minimum Rating", "label" => "Min Rating", "pattern" => "\d*\.?\d*", "include_margin" => false],         //UCID: LM457
                                                                                                                                                                                 //DATE: 4/16/2024     
-    ["type" => "number", "name" => "min_num_reviews", "placeholder" => "Minimum Reviews", "label" => "Minimum Reviews", "include_margin" => false],
+    ["type" => "number", "name" => "min_num_reviews", "placeholder" => "Minimum Reviews", "label" => "Min Reviews", "include_margin" => false],
 
     ["type" => "date", "name" => "date_min", "placeholder" => "Minimum Date", "label" => "Minimum Date", "include_margin" => false],
     ["type" => "date", "name" => "date_max", "placeholder" => "Maximum Date", "label" => "Maximum Date", "include_margin" => false],

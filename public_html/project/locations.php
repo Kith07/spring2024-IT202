@@ -23,8 +23,9 @@ $form = [
 ];
 
 $total_records = get_total_count("tourist_info t LEFT JOIN `UserLocations` ut on t.id = ut.places_id");
-$query = "SELECT t.id, location_id, language, currency, NationalID, name, ranking, description, rating, num_reviews, website, address, phone, write_review, monday_open, monday_close, tuesday_open, tuesday_close, wednesday_open, wednesday_close, thursday_open, thursday_close, 
-friday_open, friday_close, saturday_open, saturday_close, sunday_open, sunday_close, popular_tour_title, primary_category, price, partner, tour_url, product_code, is_api, t.created, ut.user_id  FROM `tourist_info` t LEFT JOIN `UserLocations` ut on t.id = ut.places_id WHERE 1=1";
+$query = "SELECT u.username, t.id, location_id, language, currency, NationalID, name, ranking, description, rating, num_reviews, website, address, phone, write_review, monday_open, monday_close, tuesday_open, tuesday_close, wednesday_open, wednesday_close, thursday_open, thursday_close, 
+friday_open, friday_close, saturday_open, saturday_close, sunday_open, sunday_close, popular_tour_title, primary_category, price, partner, tour_url, product_code, is_api, t.created, ut.user_id  FROM `tourist_info` t LEFT JOIN `UserLocations` ut on t.id = ut.places_id LEFT JOIN Users u on u.id = ut.user_id
+WHERE 1=1";
 $params = [];
 $session_key = $_SERVER["SCRIPT_NAME"];
 $is_clear = isset($_GET["clear"]);
@@ -145,9 +146,9 @@ $table = ["data" => $results, "title" => "List of Tourist Locations Data", "igno
     </form>
     <?php render_result_counts(count($results), $total_records); ?>
     <div class="row w-100 row-cols-auto row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-5 g-4">
-        <?php foreach ($results as $broker) : ?>
+        <?php foreach ($results as $loc) : ?>
             <div class="col">
-                <?php render_tourist_card($broker); ?>
+                <?php render_tourist_card($loc); ?>
             </div>
         <?php endforeach; ?>
         <?php if (count($results) === 0) : ?>

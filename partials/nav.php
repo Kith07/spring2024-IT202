@@ -52,7 +52,7 @@ session_start();
                 <?php if (has_role("Admin")) : ?>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Admin
+                            Roles
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="<?php echo get_url('admin/create_role.php'); ?>">Create Role</a></li>
@@ -70,6 +70,7 @@ session_start();
                             <li><a class="dropdown-item" href="<?php echo get_url('admin/create_touristAPI.php'); ?>">Fetch Tourist Location</a></li>
                             <li><a class="dropdown-item" href="<?php echo get_url('admin/create_touristManual.php'); ?>">Create Tourist Location</a></li>
                             <li><a class="dropdown-item" href="<?php echo get_url('admin/list_touristLocs.php'); ?>">List Tourist Locations</a></li>
+                            <li><a class="dropdown-item" href="<?php echo get_url('admin/location_Associations.php'); ?>">Favorited Tourist Locations</a></li>
                         </ul>
                     </li>
                 <?php endif; ?>
