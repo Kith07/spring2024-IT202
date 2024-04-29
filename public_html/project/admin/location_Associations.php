@@ -30,8 +30,10 @@ $form = [
 
 $total_records = get_total_count("tourist_info t JOIN `UserLocations` ut ON t.id = ut.places_id");
 
-$query = "SELECT u.username, t.id, location_id, language, currency, NationalID, name, ranking, description, rating, num_reviews, website, address, phone, write_review, monday_open, monday_close, tuesday_open, tuesday_close, wednesday_open, wednesday_close, thursday_open, thursday_close, 
-friday_open, friday_close, saturday_open, saturday_close, sunday_open, sunday_close, popular_tour_title, primary_category, price, partner, tour_url, product_code, is_api, t.created, user_id, ut.places_id, IF (ut.user_id = :current_user_id, 1, 0) AS is_favorite FROM `tourist_info` t JOIN `UserLocations` ut ON t.id = ut.places_id JOIN `Users` u ON u.id = ut.user_id";
+$query = "SELECT u.username, t.id, t.location_id, t.language, t.currency, t.NationalID, t.name, t.ranking, t.description, t.rating, t.num_reviews, t.website, t.address, t.phone, t.write_review, t.monday_open, t.monday_close, t.tuesday_open, t.tuesday_close, t.wednesday_open, t.wednesday_close, t.thursday_open, t.thursday_close, 
+t.friday_open, t.friday_close, t.saturday_open, t.saturday_close, t.sunday_open, t.sunday_close, t.popular_tour_title, t.primary_category, t.price, t.partner, t.tour_url, t.product_code, t.is_api, t.created, ut.user_id, ut.places_id, IF(ut.user_id = :current_user_id, 1, 0) AS is_favorite,
+(SELECT COUNT(user_id) FROM UserLocations WHERE places_id = t.id) AS total_users FROM tourist_info t JOIN UserLocations ut ON t.id = ut.places_id JOIN Users u ON u.id = ut.user_id";
+
 $params = ["current_user_id" => get_user_id()];
 $session_key = $_SERVER["SCRIPT_NAME"];
 $is_clear = isset($_GET["clear"]);
@@ -145,8 +147,7 @@ try {
 
 $table = ["data" => $results, "title" => "List of Tourist Locations Data", "ignored_columns" => [
     "id", "location_id", "language", "currency", "description", "write_review", "monday_open", "monday_close", "tuesday_open", "tuesday_close", "wednesday_open", "wednesday_close",
-    "thursday_open", "thursday_close", "friday_open", "friday_close", "saturday_open", "saturday_close", "sunday_open", "sunday_close", "popular_tour_title", "primary_category", "price", "partner", "tour_url", "product_code", "is_api"
-], "view_url" => get_url("viewLocations.php")];
+    "thursday_open", "thursday_close", "friday_open", "friday_close", "saturday_open", "saturday_close", "sunday_open", "sunday_close", "popular_tour_title", "primary_category", "price", "partner", "tour_url", "product_code", "is_api"]];
 ?>
 
 <div class="container-fluid">

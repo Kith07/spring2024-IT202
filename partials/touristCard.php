@@ -8,7 +8,12 @@ if (!isset($output)) {
     <div class="card mx-auto" style="width: 18rem;">
         <?php if (isset($output["username"])) : ?>
             <div class="card-header">
-                Favorited By: <?php se($output, "username", "N/A"); ?>
+                <Strong>Selected By: </Strong><?php se($output, "username", "N/A"); ?>
+            </div>
+        <?php endif; ?>
+        <?php if (isset($output["total_users"])) : ?>
+            <div class="card-header">
+                <strong>Favorited By: </strong><?php se($output, "total_users", "N/A"); ?> Users
             </div>
         <?php endif; ?>
         <div class="card-body">
