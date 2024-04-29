@@ -23,8 +23,8 @@ if (!isset($output)) {
                     <li class="list-group-item"><strong>National ID: </strong> <?php se($output, "NationalID", "Unknown"); ?></li>
                     <li class="list-group-item"><strong>Name:</strong> <?php se($output, "name", "Unknown"); ?></li>
                     <li class="list-group-item"><strong>Rating:</strong> <?php se($output, "rating", "Unknown"); ?></li>
-                    <li class="list-group-item"><strong>Number of Reviews:</strong> <?php se($output, "num_reviews", "Unknown"); ?></li>
-                    <li class="list-group-item"><strong>Website: </strong><?php se($output, "website", "Unknown"); ?></li>
+                    <li class="list-group-item"><strong>Number of Reviews:</strong> <?php se($output, "num_reviews", "Unknown"); ?></li>        <!--UCID: LM457-->
+                    <li class="list-group-item"><strong>Website: </strong><?php se($output, "website", "Unknown"); ?></li>                      <!--DATE: 4/29/2024-->
                     <li class="list-group-item"><strong>Address: </strong><?php se($output, "address", "Unknown"); ?></li>
                     <li class="list-group-item"><strong>Phone: </strong><?php se($output, "phone", "Unknown"); ?></li>
                 </ul>
@@ -43,7 +43,7 @@ if (!isset($output)) {
                     <div class="card-body">
                         <?php $id = isset($output["id"]) ? $output["id"] : (isset($_GET["id"]) ? $_GET["id"] : -1); ?>
                         <div class="d-flex justify-content-center">
-                            <a href="<?php echo get_url('api/bucketList_locations.php?places_id=' . $output["id"]); ?>" class="btn btn-success">Add to Travel Bucket List</a>
+                            <a href="<?php echo get_url('api/bucketList_Locations.php?places_id=' . $output["id"]); ?>" class="btn btn-success">Add to Travel Bucket List</a>
                         </div>
                     </div>
                 <?php else : ?>
