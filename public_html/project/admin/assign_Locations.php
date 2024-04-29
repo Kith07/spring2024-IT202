@@ -38,23 +38,31 @@ if (isset($_POST["users"]) && isset($_POST["places"])) {
 
 //get active roles
 $active_places = [];
-$db = getDB();
-$stmt = $db->prepare("SELECT id, name, description FROM tourist_info WHERE is_active = 1 LIMIT 10");
-try {
-    $stmt->execute();
-    $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    if ($results) {
-        $active_places = $results;
+$places = "";
+if (isset($_GET["places"])) {
+    $places = $_GET["places"];
+    if (!empty($places)) {
+        $db = getDB();
+        $stmt = $db->prepare("SELECT id, name FROM tourist_info WHERE name like :name LIMIT 25");
+        try {
+            $stmt->execute(["name" => "%$places%"]);
+            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            if ($results) {
+                $active_places = $results;
+            }
+        } catch (PDOException $e) {
+            flash(var_export($e->errorInfo, true), "danger");
+        }
+    } else {
+        flash("Location must not be empty", "warning");
     }
-} catch (PDOException $e) {
-    flash(var_export($e->errorInfo, true), "danger");
 }
 
 //search for user by username
 $users = [];
 $username = "";
-if (isset($_POST["username"])) {
-    $username = se($_POST, "username", "", false);
+if (isset($_GET["username"])) {
+    $username = se($_GET, "username", "", false);
     if (!empty($username)) {
         $db = getDB();
         $stmt = $db->prepare("SELECT Users.id, username, 
@@ -77,8 +85,9 @@ if (isset($_POST["username"])) {
 ?>
 <div class="container-fluid">
     <h1>Assign Favorite Locations</h1>
-    <form method="POST">
+    <form method="GET">
         <?php render_input(["type" => "search", "name" => "username", "placeholder" => "Username Search", "value" => $username]);/*lazy value to check if form submitted, not ideal*/ ?>
+        <?php render_input(["type" => "search", "name" => "places", "placeholder" => "Location Search", "value" => $places]);/*lazy value to check if form submitted, not ideal*/ ?>
         <?php render_button(["text" => "Search", "type" => "submit"]); ?>
     </form>
     <form method="POST">

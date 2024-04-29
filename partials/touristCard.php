@@ -22,57 +22,12 @@ if (!isset($output)) {
                 <ul class="list-group">
                     <li class="list-group-item"><strong>National ID: </strong> <?php se($output, "NationalID", "Unknown"); ?></li>
                     <li class="list-group-item"><strong>Name:</strong> <?php se($output, "name", "Unknown"); ?></li>
-                    <li class="list-group-item"><strong>Description:</strong> <?php se($output, "description", "Unknown"); ?></li>
                     <li class="list-group-item"><strong>Rating:</strong> <?php se($output, "rating", "Unknown"); ?></li>
                     <li class="list-group-item"><strong>Number of Reviews:</strong> <?php se($output, "num_reviews", "Unknown"); ?></li>
                     <li class="list-group-item"><strong>Website: </strong><?php se($output, "website", "Unknown"); ?></li>
                     <li class="list-group-item"><strong>Address: </strong><?php se($output, "address", "Unknown"); ?></li>
                     <li class="list-group-item"><strong>Phone: </strong><?php se($output, "phone", "Unknown"); ?></li>
-                    <li class="list-group-item"><strong>Write Review: </strong><?php se($output, "write_review", "Unknown"); ?></li>
-                    <li class="list-group-item"><strong>Timings: </strong><br><br>
-                        <table>
-                            <tr>
-                                <th>Day</th>
-                                <th>Open Hours</th>
-                            </tr>
-                            <tr>
-                                <td>Monday:</td>
-                                <td><?php se($output, "monday_open", "Not Available"); ?> - <?php se($output, "monday_close", "Not Available"); ?></td>
-                            </tr>
-                            <tr>
-                                <td>Tuesday:</td>
-                                <td><?php se($output, "tuesday_open", "Not Available"); ?> - <?php se($output, "tuesday_close", "Not Available"); ?></td>
-                            </tr>
-                            <tr>
-                                <td>Wednesday:</td>
-                                <td><?php se($output, "wednesday_open", "Not Available"); ?> - <?php se($output, "wednesday_close", "Not Available"); ?></td>
-                            </tr>
-                            <tr>
-                                <td>Thursday:</td>
-                                <td><?php se($output, "thursday_open", "Not Available"); ?> - <?php se($output, "thursday_close", "Not Available"); ?></td>
-                            </tr>
-                            <tr>
-                                <td>Friday:</td>
-                                <td><?php se($output, "friday_open", "Not Available"); ?> - <?php se($output, "friday_close", "Not Available"); ?></td>
-                            </tr>
-                            <tr>
-                                <td>Saturday:</td>
-                                <td><?php se($output, "saturday_open", "Not Available"); ?> - <?php se($output, "saturday_close", "Not Available"); ?></td>
-                            </tr>
-                            <tr>
-                                <td>Sunday:</td>
-                                <td><?php se($output, "sunday_open", "Not Available"); ?> - <?php se($output, "sunday_close", "Not Available"); ?></td>
-                            </tr>
-                        </table>
-                    </li>
-                    <li class="list-group-item"><strong>Popular Tour Title: </strong><?php se($output, "popular_tour_title", "Unknown"); ?></li>
-                    <li class="list-group-item"><strong>Primary Category: </strong><?php se($output, "primary_category", "Unknown"); ?></li>
-                    <li class="list-group-item"><strong>Price: </strong><?php se($output, "price", "Unknown"); ?></li>
-                    <li class="list-group-item"><strong>Partner: </strong><?php se($output, "partner", "Unknown"); ?></li>
-                    <li class="list-group-item"><strong>Tour URL: </strong><?php se($output, "tour_url", "Unknown"); ?></li>
-                    <li class="list-group-item"><strong>Product Code: </strong><?php se($output, "product_code", "Unknown"); ?></li>
                 </ul>
-
             </div>
             <div class="card body">
                 <?php if (isset($output["id"])) : ?>
@@ -87,7 +42,9 @@ if (!isset($output)) {
                 <?php if ($output["is_favorite"] == 0 || $output["user_id"] === "N/A") : ?>
                     <div class="card-body">
                         <?php $id = isset($output["id"]) ? $output["id"] : (isset($_GET["id"]) ? $_GET["id"] : -1); ?>
-                        <a href="<?php echo get_url('api/bucketList_locations.php?places_id=' . $output["id"]); ?>" class="card-link">Add to Travel Bucket List</a>
+                        <div class="d-flex justify-content-center">
+                            <a href="<?php echo get_url('api/bucketList_locations.php?places_id=' . $output["id"]); ?>" class="btn btn-success">Add to Travel Bucket List</a>
+                        </div>
                     </div>
                 <?php else : ?>
                     <div class="card-body">
