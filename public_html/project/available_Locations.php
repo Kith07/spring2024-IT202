@@ -24,9 +24,11 @@ $form = [
 
 $total_records = get_total_count("tourist_info t WHERE t.id NOT IN (SELECT places_id FROM `UserLocations`)");
 
-$query = "SELECT t.id, location_id, language, currency, NationalID, name, ranking, description, rating, num_reviews, website, address, phone, write_review, monday_open, monday_close, tuesday_open, tuesday_close, wednesday_open, wednesday_close, thursday_open, thursday_close, 
-friday_open, friday_close, saturday_open, saturday_close, sunday_open, sunday_close, popular_tour_title, primary_category, price, partner, tour_url, product_code, is_api, t.created  FROM `tourist_info` t WHERE t.id NOT IN (SELECT places_id FROM `UserLocations`)";
-$params = [];
+$query = "SELECT t.id, location_id, language, currency, NationalID, name, ranking, description, rating, num_reviews, website, address, phone, write_review, monday_open, monday_close, tuesday_open, tuesday_close, wednesday_open, 
+wednesday_close, thursday_open, thursday_close, friday_open, friday_close, saturday_open, saturday_close, sunday_open, sunday_close, popular_tour_title, primary_category, price, partner, tour_url, product_code, is_api, t.created, 
+(SELECT COUNT(*) FROM UserLocations WHERE places_id = t.id AND user_id = :user_id) AS is_favorite FROM `tourist_info` t WHERE t.id NOT IN (SELECT places_id FROM `UserLocations`)";
+
+$params = [":user_id" => get_user_id()];
 $session_key = $_SERVER["SCRIPT_NAME"];
 $is_clear = isset($_GET["clear"]);
 if ($is_clear) {

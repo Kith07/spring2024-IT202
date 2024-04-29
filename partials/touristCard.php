@@ -76,6 +76,9 @@ if (!isset($output)) {
                 <?php if (isset($output["user_id"])) : ?>
                     <a class="btn btn-primary" href="<?php echo get_url("profile.php?id=" . $output["user_id"]); ?>"><?php se($output, "username"); ?>'s Profile</a>
                 <?php endif; ?>
+                <?php if (isset($output["user_id"]) && isset($output["places_id"])) : ?>
+                    <a class="btn btn-danger" href="<?php echo get_url("delete_Association.php?user_id=" . $output["user_id"] . "&places_id=" . $output["places_id"]); ?>">Remove</a>
+                <?php endif; ?>
                 <?php if ($output["is_favorite"] == 0 || $output["user_id"] === "N/A") : ?>
                     <div class="card-body">
                         <?php $id = isset($output["id"]) ? $output["id"] : (isset($_GET["id"]) ? $_GET["id"] : -1); ?>

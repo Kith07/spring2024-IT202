@@ -38,9 +38,8 @@ $form = [
 $total_records = get_total_count("tourist_info t JOIN `UserLocations` ut ON t.id = ut.places_id WHERE user_id = :user_id", [":user_id" => get_user_id()]);
 
 $query = "SELECT username, t.id, location_id, language, currency, NationalID, name, ranking, description, rating, num_reviews, website, address, phone, write_review, monday_open, monday_close, tuesday_open, tuesday_close, wednesday_open, wednesday_close, thursday_open, thursday_close, 
-friday_open, friday_close, saturday_open, saturday_close, sunday_open, sunday_close, popular_tour_title, primary_category, price, partner, tour_url, product_code, is_api, t.created, user_id,
+friday_open, friday_close, saturday_open, saturday_close, sunday_open, sunday_close, popular_tour_title, primary_category, price, partner, tour_url, product_code, is_api, t.created, user_id, ut.places_id,
 IF (ut.user_id = :current_user_id, 1, 0) AS is_favorite FROM `tourist_info` t JOIN `UserLocations` ut ON t.id = ut.places_id LEFT JOIN Users u ON u.id = ut.user_id WHERE user_id = :user_id";
-
 $params = [':current_user_id' => get_user_id(), ":user_id" => get_user_id()];
 
 $session_key = $_SERVER["SCRIPT_NAME"];
@@ -144,10 +143,9 @@ try {
     flash("An error occurred, please try again", "danger");
 }
 
-$table = ["data" => $results, "title" => "List of Tourist Locations Data", "ignored_columns" => [
-    "id", "location_id", "language", "currency", "description", "write_review", "monday_open", "monday_close", "tuesday_open", "tuesday_close", "wednesday_open", "wednesday_close",
-    "thursday_open", "thursday_close", "friday_open", "friday_close", "saturday_open", "saturday_close", "sunday_open", "sunday_close", "popular_tour_title", "primary_category", "price", "partner", "tour_url", "product_code", "is_api"
-], "view_url" => get_url("viewLocations.php")];
+$table = ["data" => $results, "title" => "List of Tourist Locations Data", "ignored_columns" => ["id", "location_id", "language", "currency", "description", "write_review", "monday_open", "monday_close", "tuesday_open", 
+"tuesday_close", "wednesday_open", "wednesday_close", "thursday_open", "thursday_close", "friday_open", "friday_close", "saturday_open", "saturday_close", "sunday_open", "sunday_close", "popular_tour_title", "primary_category", 
+"price", "partner", "tour_url", "product_code", "is_api"]];
 ?>
 
 <div class="container-fluid">
@@ -163,14 +161,14 @@ $table = ["data" => $results, "title" => "List of Tourist Locations Data", "igno
         <div style="display: flex-end; align-items: center;">
             <?php render_button(["text" => "Filter", "type" => "submit"]); ?>
             <a href="?clear" class="btn btn-secondary ml-2">Clear</a>
-            <a href="?remove" onclick="confirm('Are you sure?')?'':event.preventDefault()" class="btn btn-danger ml-2">Remove All Brokers</a>
+            <a href="?remove" onclick="confirm('Are you sure?')?'':event.preventDefault()" class="btn btn-danger ml-2">Remove All Locations</a>
         </div>
     </form>
     <?php render_result_counts(count($results), $total_records); ?>
     <div class="row w-100 row-cols-auto row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-5 g-4">
-        <?php foreach ($results as $broker) : ?>
+        <?php foreach ($results as $loc) : ?>
             <div class="col">
-                <?php render_tourist_card($broker); ?>
+                <?php render_tourist_card($loc); ?>
             </div>
         <?php endforeach; ?>
         <?php if (count($results) === 0) : ?>
