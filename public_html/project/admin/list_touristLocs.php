@@ -4,7 +4,7 @@ require(__DIR__ . "/../../../partials/nav.php");
 
 if (!has_role("Admin")) {
     flash("You don't have permission to view this page", "warning");            //UCID: LM457
-    die(header("Location: " . get_url("home.php")));                            //DATE: 4/16/2024
+    redirect("home.php");                            //DATE: 4/16/2024
 }
 ?>
 <?php
@@ -28,6 +28,7 @@ $form = [
     ["type" => "number", "name" => "limit", "label" => "Limit", "value" => "10", "include_margin" => false],
 ];
 
+$total_records = get_total_count("tourist_info");
 $query = "SELECT id, location_id, language, currency, NationalID, name, ranking, description, rating, num_reviews, website, address, phone, write_review, monday_open, monday_close, tuesday_open, tuesday_close, wednesday_open, wednesday_close, thursday_open, thursday_close, 
 friday_open, friday_close, saturday_open, saturday_close, sunday_open, sunday_close, popular_tour_title, primary_category, price, partner, tour_url, product_code, is_api, created  FROM `tourist_info` WHERE 1=1";
 $params = [];
@@ -36,7 +37,7 @@ $is_clear = isset($_GET["clear"]);
 if ($is_clear) {
     session_delete($session_key);
     unset($_GET["clear"]);
-    die(header("Location: " . $session_key));
+    redirect($session_key);
 } else {
     $session_data = session_load($session_key);
 }
@@ -146,6 +147,7 @@ $table = ["data" => $results, "title" => "List of Tourist Locations Data", "igno
         <?php render_button(["text" => "Filter", "type" => "submit"]); ?>
         <a href="?clear" class="btn btn-secondary">Clear</a>
     </form>
+    <?php render_result_counts(count($results), $total_records); ?>
     <?php render_table($table); ?>
 </div>
 

@@ -4,7 +4,7 @@ require(__DIR__ . "/../../../partials/nav.php");
 
 if (!has_role("Admin")) {                                               //UCID: LM457
     flash("You don't have permission to view this page", "warning");    //DATE: 4/16/2024
-    die(header("Location: $BASE_PATH" . "/home.php"));
+    redirect("home.php");
 }
 ?>
 
@@ -75,7 +75,7 @@ if ($id > -1) {
     }
 } else {
     flash("Invalid ID passed", "warning");
-    die(header("Location: " . get_url("admin/list_touristLocs.php")));
+    redirect("admin/list_touristLocs.php");
 }
 
 if ($output) {
