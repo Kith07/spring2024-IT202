@@ -4,7 +4,6 @@ require(__DIR__ . "/../../partials/nav.php");
 ?>
 
 <?php
-
 $id = se($_GET, "id", -1, false);           //UCID: LM457
 $output = [];                               //DATE: 4/16/2024
 if ($id > -1) {
@@ -38,7 +37,7 @@ foreach ($output as $key => $value) {
     <h3>Tourist Location: <?php se($output, "name", "Unknown"); ?></h3>
     <div>
         <a href="<?php echo get_url("locations.php"); ?>" class="btn btn-secondary">Back</a>
-        <a href="<?php echo get_url('api/bucketList_locations.php?places_id=' . $output["id"]); ?>" class="btn btn-success">Add to Travel Bucket List</a>
+        <a href="<?php echo get_url('api/bucketList_Locations.php?places_id=' . $output["id"]); ?>" class="btn btn-success">Add to Travel Bucket List</a>
     </div>
     <ul class="list-group">
         <li class="list-group-item"><strong>National ID: </strong> <?php se($output, "NationalID", "Unknown"); ?></li>

@@ -6,8 +6,8 @@ if (!isset($result_count)) {
     $result_count = -1;
 }
 if (!isset($total_count)) {
-    $message = "Dev Note: total_count not set";
-    error_log($message);
+    $message = "Dev Note: total_count not set";         //UCID: LM457
+    error_log($message);                                //DATE: 4/29/2024
     flash($message);
     $total_records = -1;
 }

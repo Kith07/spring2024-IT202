@@ -10,8 +10,8 @@ if (isset($_POST["users"]) && isset($_POST["places"])) {
     $user_ids = $_POST["users"];
     $places_ids = $_POST["places"];
     if (empty($user_ids) || empty($places_ids)) {
-        flash("Both users and places need to be selected", "warning");
-    } else {
+        flash("Both users and places need to be selected", "warning");          //UCID: LM457
+    } else {                                                                    //DATE: 4/29/2024                           
         $db = getDB();
         $stmt = $db->prepare("SELECT user_id, places_id FROM UserLocations WHERE user_id = :uid AND places_id = :pid");
         $insert_stmt = $db->prepare("INSERT INTO UserLocations (user_id, places_id) VALUES (:uid, :pid)");
@@ -36,11 +36,11 @@ if (isset($_POST["users"]) && isset($_POST["places"])) {
     }
 }
 
-//get active roles
+//get active places
 $active_places = [];
 $places = "";
-if (isset($_GET["places"])) {
-    $places = $_GET["places"];
+if (isset($_GET["places"])) {                        //UCID: LM457
+    $places = $_GET["places"];                      //DATE: 4/29/2024
     if (!empty($places)) {
         $db = getDB();
         $stmt = $db->prepare("SELECT id, name FROM tourist_info WHERE name like :name LIMIT 25");
@@ -62,13 +62,13 @@ if (isset($_GET["places"])) {
 $users = [];
 $username = "";
 if (isset($_GET["username"])) {
-    $username = se($_GET, "username", "", false);
-    if (!empty($username)) {
+    $username = se($_GET, "username", "", false);                       //UCID: LM457
+    if (!empty($username)) {                                            //DATE: 4/29/2024   
         $db = getDB();
         $stmt = $db->prepare("SELECT Users.id, username, 
         (SELECT GROUP_CONCAT(name SEPARATOR ', ') from 
         UserLocations ut JOIN tourist_info t on ut.places_id = t.id WHERE ut.user_id = Users.id) as places
-        from Users WHERE username like :username");
+        from Users WHERE username like :username LIMIIT 25");
         try {
             $stmt->execute([":username" => "%$username%"]);
             $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -109,8 +109,8 @@ if (isset($_GET["username"])) {
                                         <?php render_input(["type" => "checkbox", "id" => "user_".se($user, 'id', "", false), "name" => "users[]", "label" => se($user, "username", "", false), "value" => se($user, 'id', "", false)]); ?>
 
                                     </td>
-                                    <td><?php se($user, "places", "No Favorite Locations"); ?></td>
-                                </tr>
+                                    <td><?php se($user, "places", "No Favorite Locations"); ?></td>                 <!--UCID: LM457-->
+                                </tr>                                                                               <!--DATE: 4/29/2024-->
                             <?php endforeach; ?>
                         </table>
                     </td>

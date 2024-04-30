@@ -6,8 +6,8 @@ if (isset($_GET["remove"])) {
     $query = "DELETE FROM `UserLocations` WHERE user_id = :user_id";
     try {
         $stmt = $db->prepare($query);
-        $stmt->execute([":user_id" => get_user_id()]);
-        flash("Successfully removed all brokers", "success");
+        $stmt->execute([":user_id" => get_user_id()]);                            //UCID: LM457
+        flash("Successfully removed all brokers", "success");                     //DATE: 4/29/2024
     } catch (PDOException $e) {
         error_log("Error removing broker associations: " . var_export($e, true));
         flash("Error removing broker associations", "danger");
@@ -37,8 +37,8 @@ $form = [
 
 $total_records = get_total_count("tourist_info t JOIN `UserLocations` ut ON t.id = ut.places_id WHERE user_id = :user_id", [":user_id" => get_user_id()]);
 
-$query = "SELECT username, t.id, location_id, language, currency, NationalID, name, ranking, description, rating, num_reviews, website, address, phone, write_review, monday_open, monday_close, tuesday_open, tuesday_close, wednesday_open, wednesday_close, thursday_open, thursday_close, 
-friday_open, friday_close, saturday_open, saturday_close, sunday_open, sunday_close, popular_tour_title, primary_category, price, partner, tour_url, product_code, is_api, t.created, user_id, ut.places_id,
+$query = "SELECT username, t.id, location_id, language, currency, NationalID, name, ranking, description, rating, num_reviews, website, address, phone, write_review, monday_open, monday_close, tuesday_open, tuesday_close, wednesday_open, wednesday_close, thursday_open, 
+thursday_close, friday_open, friday_close, saturday_open, saturday_close, sunday_open, sunday_close, popular_tour_title, primary_category, price, partner, tour_url, product_code, is_api, t.created, user_id, ut.places_id,
 IF (ut.user_id = :current_user_id, 1, 0) AS is_favorite FROM `tourist_info` t JOIN `UserLocations` ut ON t.id = ut.places_id LEFT JOIN Users u ON u.id = ut.user_id WHERE user_id = :user_id";
 $params = [':current_user_id' => get_user_id(), ":user_id" => get_user_id()];
 
@@ -52,8 +52,8 @@ if ($is_clear) {
     $session_data = session_load($session_key);
 }
 
-if (count($_GET) == 0 && isset($session_data) && count($session_data) > 0) {
-    if ($session_data) {
+if (count($_GET) == 0 && isset($session_data) && count($session_data) > 0) {                //UCID: LM457
+    if ($session_data) {                                                                    //DATE: 4/29/2024
         $_GET = $session_data;
     }
 }
@@ -62,8 +62,8 @@ if (count($_GET) > 0) {
     $keys = array_keys($_GET);
 
     foreach ($form as $k => $v) {
-        if (in_array($v["name"], $keys)) {                                              //UCID: LM457
-            $form[$k]["value"] = $_GET[$v["name"]];                                     //DATE: 4/16/2024
+        if (in_array($v["name"], $keys)) {                                              
+            $form[$k]["value"] = $_GET[$v["name"]];                                    
         }
     }
     //NationalID
@@ -75,8 +75,8 @@ if (count($_GET) > 0) {
     //Name
     if (!empty($_GET["name"])) {
         $query .= " AND name LIKE :name";
-        $params[":name"] = "%" . $_GET["name"] . "%";
-    }
+        $params[":name"] = "%" . $_GET["name"] . "%";                       //UCID: LM457
+    }                                                                       //DATE: 4/29/2024                           
 
     //Rating
     if (!empty($_GET["min_rating"])) {
@@ -119,8 +119,8 @@ if (count($_GET) > 0) {
     $query .= " ORDER BY $sort $order";
     //limit
     try {
-        $limit = (int)se($_GET, "limit", "10", false);                                              //UCID: LM457
-    } catch (Exception $e) {                                                                        //DATE: 4/16/2024             
+        $limit = (int)se($_GET, "limit", "10", false);                                              
+    } catch (Exception $e) {                                                                                    
         $limit = 10;
     }
     if ($limit < 1 || $limit > 100) {
@@ -154,8 +154,8 @@ $table = ["data" => $results, "title" => "List of Tourist Locations Data", "igno
         <div class="row mb-3" style="align-items: center;">
             <?php foreach ($form as $k => $v) : ?>
                 <div class="col">
-                    <?php render_input($v); ?>
-                </div>
+                    <?php render_input($v); ?>                                                  <!--UCID: LM457-->
+                </div>                                                                          <!--DATE: 4/29/2024-->                                            
             <?php endforeach; ?>
         </div>
         <div style="display: flex-end; align-items: center;">
