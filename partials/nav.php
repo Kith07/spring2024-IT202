@@ -42,6 +42,9 @@ session_start();
                 <?php if (is_logged_in()) : ?>
                     <li class="nav-item"><a class="nav-link" href="<?php echo get_url('home.php'); ?>">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="<?php echo get_url('profile.php'); ?>">Profile</a></li>
+                    <li class="nav-item"><a class="nav-link" href="<?php echo get_url('locations.php'); ?>">Locations</a></li>
+                    <li class="nav-item"><a class="nav-link" href="<?php echo get_url('available_Locations.php'); ?>">Available Locations</a></li>
+                    <li class="nav-item"><a class="nav-link" href="<?php echo get_url('my_locations.php'); ?>">My Travel Bucket List</a></li>
                 <?php endif; ?>
                 <?php if (!is_logged_in()) : ?>
                     <li class="nav-item"><a class="nav-link" href="<?php echo get_url('login.php'); ?>">Login</a></li>
@@ -56,6 +59,7 @@ session_start();
                             <li><a class="dropdown-item" href="<?php echo get_url('admin/create_role.php'); ?>">Create Role</a></li>
                             <li><a class="dropdown-item" href="<?php echo get_url('admin/list_roles.php'); ?>">List Roles</a></li>
                             <li><a class="dropdown-item" href="<?php echo get_url('admin/assign_roles.php'); ?>">Assign Roles</a></li>
+                            <li><a class="dropdown-item" href="<?php echo get_url('admin/assign_Locations.php'); ?>">Assign Favorite Locations</a></li>
                         </ul>
                     </li>
                 <?php endif; ?>
@@ -68,6 +72,7 @@ session_start();
                             <li><a class="dropdown-item" href="<?php echo get_url('admin/create_touristAPI.php'); ?>">Fetch Tourist Location</a></li>
                             <li><a class="dropdown-item" href="<?php echo get_url('admin/create_touristManual.php'); ?>">Create Tourist Location</a></li>
                             <li><a class="dropdown-item" href="<?php echo get_url('admin/list_touristLocs.php'); ?>">List Tourist Locations</a></li>
+                            <li><a class="dropdown-item" href="<?php echo get_url('admin/location_Associations.php'); ?>">Favorited Tourist Locations</a></li>
                         </ul>
                     </li>
                 <?php endif; ?>
