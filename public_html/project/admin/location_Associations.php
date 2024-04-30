@@ -45,8 +45,8 @@ if ($is_clear) {
     $session_data = session_load($session_key);
 }
 
-if (count($_GET) == 0 && isset($session_data) && count($session_data) > 0) {
-    if ($session_data) {
+if (count($_GET) == 0 && isset($session_data) && count($session_data) > 0) {                            //UCID: LM457
+    if ($session_data) {                                                                                //DATE: 4/29/2024
         $_GET = $session_data;
     }
 }
@@ -56,7 +56,7 @@ if (count($_GET) > 0) {
 
     foreach ($form as $k => $v) {
         if (in_array($v["name"], $keys)) {                                              //UCID: LM457
-            $form[$k]["value"] = $_GET[$v["name"]];                                     //DATE: 4/16/2024
+            $form[$k]["value"] = $_GET[$v["name"]];                                     //DATE: 4/29/2024
         }
     }
 
@@ -120,8 +120,8 @@ if (count($_GET) > 0) {
     $query .= " ORDER BY $sort $order";
     //limit
     try {
-        $limit = (int)se($_GET, "limit", "10", false);                                              //UCID: LM457
-    } catch (Exception $e) {                                                                        //DATE: 4/16/2024             
+        $limit = (int)se($_GET, "limit", "10", false);                                             
+    } catch (Exception $e) {                                                                               
         $limit = 10;
     }
     if ($limit < 1 || $limit > 100) {
@@ -154,13 +154,13 @@ $table = ["data" => $results, "title" => "List of Tourist Locations Data", "igno
     <h3>Favorited Travel Locations (Associated)</h3>
     <form method="GET">
         <div class="row mb-3" style="align-items: flex-end;">
-            <?php foreach ($form as $k => $v) : ?>
-                <div class="col">
+            <?php foreach ($form as $k => $v) : ?>                                                                                 <!--UCID: LM457-->                                    
+                <div class="col">                                                                                                  <!--DATE: 4/29/2024-->                                 
                     <?php render_input($v); ?>
                 </div>
             <?php endforeach; ?>
         </div>
-        <?php render_button(["text" => "Filter", "type" => "submit"]); ?>
+        <?php render_button(["text" => "Filter", "type" => "submit"]); ?>                                                           
         <a href="?clear" class="btn btn-secondary">Clear</a>
         <?php if (isset($_GET["username"])) : ?>
             <a class="btn btn-danger" href="<?php echo get_url("admin/removeAllAssociations.php?username=" . $_GET["username"]); ?>">Remove All Locations</a>

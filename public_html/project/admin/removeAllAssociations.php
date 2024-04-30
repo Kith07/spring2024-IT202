@@ -7,8 +7,8 @@ if (!has_role("Admin")) {
 }
 
 if (isset($_GET["username"])) {
-    $username = $_GET["username"];
-    $partialName = "%$username%";
+    $username = $_GET["username"];                      //UCID: LM457
+    $partialName = "%$username%";                       //DATE: 4/29/2024
 
     $db = getDB();
     $stmt = $db->prepare("DELETE FROM UserLocations WHERE user_id IN (SELECT id FROM Users WHERE username LIKE :username)");

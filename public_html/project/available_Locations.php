@@ -32,11 +32,11 @@ $params = [":user_id" => get_user_id()];
 $session_key = $_SERVER["SCRIPT_NAME"];
 $is_clear = isset($_GET["clear"]);
 if ($is_clear) {
-    session_delete($session_key);
-    unset($_GET["clear"]);
+    session_delete($session_key);                                           //UCID: LM457
+    unset($_GET["clear"]);                                                  //DATE: 4/29/2024
     redirect($session_key);
 } else {
-    $session_data = session_load($session_key);
+    $session_data = session_load($session_key);                     
 }
 
 if (count($_GET) == 0 && isset($session_data) && count($session_data) > 0) {
@@ -50,7 +50,7 @@ if (count($_GET) > 0) {
 
     foreach ($form as $k => $v) {
         if (in_array($v["name"], $keys)) {                                              //UCID: LM457
-            $form[$k]["value"] = $_GET[$v["name"]];                                     //DATE: 4/16/2024
+            $form[$k]["value"] = $_GET[$v["name"]];                                     //DATE: 4/29/2024
         }
     }
     //NationalID
@@ -104,8 +104,8 @@ if (count($_GET) > 0) {
     $query .= " ORDER BY $sort $order";
     //limit
     try {
-        $limit = (int)se($_GET, "limit", "10", false);                                              //UCID: LM457
-    } catch (Exception $e) {                                                                        //DATE: 4/16/2024             
+        $limit = (int)se($_GET, "limit", "10", false);                                             
+    } catch (Exception $e) {                                                                           
         $limit = 10;
     }
     if ($limit < 1 || $limit > 100) {
@@ -136,8 +136,8 @@ $table = ["data" => $results, "title" => "List of Tourist Locations Data", "igno
 <div class="container-fluid">
 <h3>Available Tourist Locations (Unassociated)</h3>
     <form method="GET">
-        <div class = "row mb-3" style = "align-items: space-around;">
-            <?php foreach ($form as $k => $v) : ?>                             
+        <div class = "row mb-3" style = "align-items: space-around;">                               <!--UCID: LM457-->
+            <?php foreach ($form as $k => $v) : ?>                                                  <!--DATE: 4/29/2024-->
                 <div class = "col">                                                                   
                     <?php render_input($v); ?>
                 </div>
