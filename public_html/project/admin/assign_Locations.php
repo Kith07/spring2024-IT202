@@ -68,7 +68,7 @@ if (isset($_GET["username"])) {
         $stmt = $db->prepare("SELECT Users.id, username, 
         (SELECT GROUP_CONCAT(name SEPARATOR ', ') from 
         UserLocations ut JOIN tourist_info t on ut.places_id = t.id WHERE ut.user_id = Users.id) as places
-        from Users WHERE username like :username LIMIIT 25");
+        from Users WHERE username like :username LIMIT 25");
         try {
             $stmt->execute([":username" => "%$username%"]);
             $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
